@@ -2,11 +2,8 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Avatar, Icon } from "react-native-elements";
-//import { ObtenerUsuario, cerrarsesion } from "../Utils/Acciones";
 
 export default function CustomDrawerContent(props) {
-  const { displayName, photoURL, email } = ObtenerUsuario();
-
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -16,17 +13,13 @@ export default function CustomDrawerContent(props) {
               <Avatar
                 rounded
                 size="medium"
-                source={
-                  photoURL
-                    ? { uri: photoURL }
-                    : require("../../assets/avatar.jpg")
-                }
+                source={require("../../assets/logo.png")}
                 onPress={() => navigation.toggleDrawer()}
               />
 
               <View style={{ marginLeft: 15, flexDirection: "column" }}>
-                <Text style={styles.title}>{displayName}</Text>
-                <Text style={styles.caption}>{email} </Text>
+                <Text style={styles.title}>SERPROEMCAM</Text>
+                <Text style={styles.caption}>Seguridad Privada</Text>
               </View>
             </View>
           </View>
@@ -41,9 +34,9 @@ export default function CustomDrawerContent(props) {
                   type="material-community"
                 />
               )}
-              label="Tienda"
+              label="Adelanto"
               onPress={() => {
-                props.navigation.navigate("tienda");
+                props.navigation.navigate("AdelantosStack");
               }}
             />
             <DrawerItem
@@ -55,9 +48,9 @@ export default function CustomDrawerContent(props) {
                   type="material-community"
                 />
               )}
-              label="Mi Tienda"
+              label="Documentos"
               onPress={() => {
-                props.navigation.navigate("mitienda");
+                props.navigation.navigate("DocumentosStack");
               }}
             />
             <DrawerItem
@@ -69,9 +62,37 @@ export default function CustomDrawerContent(props) {
                   type="material-community"
                 />
               )}
-              label="Cuenta"
+              label="Reportes"
               onPress={() => {
-                props.navigation.navigate("cuenta");
+                props.navigation.navigate("ReportesStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
+                  name="account-outline"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Solicitudes"
+              onPress={() => {
+                props.navigation.navigate("SolicitudesStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
+                  name="account-outline"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Turnos"
+              onPress={() => {
+                props.navigation.navigate("TurnosStack");
               }}
             />
           </View>

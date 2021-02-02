@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Icon } from "react-native-elements";
 
 import AdelantosStack from "./AdelantosStack";
 import DocumentosStack from "./DocumentosStack";
@@ -63,7 +64,20 @@ const TabBar = () => {
 export default function RutasAutenticadas() {
   return (
     <NavigationContainer>
-      <TabBar />
+      <Drawer.Navigator
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+      >
+        <Drawer.Screen
+          name="Tienda"
+          component={TabBar}
+          options={{
+            title: "Tienda",
+            drawerIcon: () => {
+              <Icon type="material-community" name="store" size={24} />;
+            },
+          }}
+        />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
