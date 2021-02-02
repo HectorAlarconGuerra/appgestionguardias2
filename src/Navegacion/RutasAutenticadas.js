@@ -8,6 +8,7 @@ import DocumentosStack from "./DocumentosStack";
 import ReportesStack from "./ReportesStack";
 import SolicitudesStack from "./SolicitudesStack";
 import TurnosStack from "./TurnosStack";
+import CustomDrawerContent from "../Components/CustomDrawerContent";
 
 //aquí importaremos algunos componentes más tarde
 
