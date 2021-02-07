@@ -34,9 +34,9 @@ export default function CustomDrawerContent(props) {
                   type="material-community"
                 />
               )}
-              label="Adelanto"
+              label="Documentos"
               onPress={() => {
-                props.navigation.navigate("AdelantosStack");
+                props.navigation.navigate("DocumentosStack");
               }}
             />
             <DrawerItem
@@ -48,9 +48,51 @@ export default function CustomDrawerContent(props) {
                   type="material-community"
                 />
               )}
-              label="Documentos"
+              label="Solicitudes"
               onPress={() => {
-                props.navigation.navigate("DocumentosStack");
+                props.navigation.navigate("SolicitudesStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
+                  name="account-outline"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Clientes"
+              onPress={() => {
+                props.navigation.navigate("ClientesStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
+                  name="account-outline"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Guardias"
+              onPress={() => {
+                props.navigation.navigate("GuardiasStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
+                  name="account-outline"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Turnos"
+              onPress={() => {
+                props.navigation.navigate("TurnosStack");
               }}
             />
             <DrawerItem
@@ -76,23 +118,9 @@ export default function CustomDrawerContent(props) {
                   type="material-community"
                 />
               )}
-              label="Solicitudes"
+              label="Sueldos"
               onPress={() => {
-                props.navigation.navigate("SolicitudesStack");
-              }}
-            />
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon
-                  name="account-outline"
-                  color={color}
-                  size={size}
-                  type="material-community"
-                />
-              )}
-              label="Turnos"
-              onPress={() => {
-                props.navigation.navigate("TurnosStack");
+                props.navigation.navigate("AdelantosStack");
               }}
             />
           </View>
