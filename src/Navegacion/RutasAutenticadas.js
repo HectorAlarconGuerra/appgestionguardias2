@@ -9,6 +9,8 @@ import DocumentosStack from "./DocumentosStack";
 import ReportesStack from "./ReportesStack";
 import SolicitudesStack from "./SolicitudesStack";
 import TurnosStack from "./TurnosStack";
+import GuardiasStack from "./GuardiasStack";
+import ClientesStack from "./ClientesStack";
 import CustomDrawerContent from "../Components/CustomDrawerContent";
 
 //aquí importaremos algunos componentes más tarde
@@ -33,29 +35,40 @@ const TabBar = () => {
       }}
     >
       <Tab.Screen
-        component={AdelantosStack}
-        name="AdelantosStack"
-        options={{ title: "Adelanto" }}
-      />
-      <Tab.Screen
         component={DocumentosStack}
         name="DocumentosStack"
-        options={{ title: "Documentos" }}
-      />
-      <Tab.Screen
-        component={ReportesStack}
-        name="ReportesStack"
-        options={{ title: "Reportes" }}
+        options={{ title: "D" }}
       />
       <Tab.Screen
         component={SolicitudesStack}
         name="SolicitudesStack"
-        options={{ title: "Solicitudes" }}
+        options={{ title: "S" }}
+      />
+      <Tab.Screen
+        component={ClientesStack}
+        name="ClientesStack"
+        options={{ title: "C" }}
+      />
+      <Tab.Screen
+        component={GuardiasStack}
+        name="GuardiasStack"
+        options={{ title: "G" }}
       />
       <Tab.Screen
         component={TurnosStack}
         name="TurnosStack"
-        options={{ title: "Turnos" }}
+        options={{ title: "T" }}
+      />
+
+      <Tab.Screen
+        component={ReportesStack}
+        name="ReportesStack"
+        options={{ title: "R" }}
+      />
+      <Tab.Screen
+        component={AdelantosStack}
+        name="AdelantosStack"
+        options={{ title: "S" }}
       />
     </Tab.Navigator>
   );
