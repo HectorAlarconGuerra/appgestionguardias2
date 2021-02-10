@@ -11,6 +11,7 @@ import {
 import { map, size, filter, isEmpty } from "lodash";
 import { useNavigation } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { addRegistro, ObtenerUsuario } from "../../Utils/Acciones";
 
 export default function RegistrarDocumento() {
   const [nombreDocumento, setNombreDocumento] = useState("");
@@ -21,20 +22,103 @@ export default function RegistrarDocumento() {
   const btnref = useRef();
   const navigation = useNavigation();
 
+  const addDocumento = async () => {
+    setErrores({});
+    if (isEmpty(nombreDocumento)) {
+      setErrores({
+        nombreDocumento: "El campo nombre documento es obligatorio",
+      });
+    } else if (isEmpty(nombreInstitucion)) {
+      setErrores({
+        nombreInstitucion: "El campo nombre institución es obligatorio ",
+      });
+    } else if (isEmpty(fechaPresentacion)) {
+      setErrores({
+        fechaPresentacion: "El campo fecha presentación es obligatorio",
+      });
+    } else if (isEmpty(fechaPresentada)) {
+      setErrores({
+        fechaPresentada: "El campo fecha presentación es obligatorio",
+      });
+    } else {
+      const documento = {
+        nombreDocumento,
+        nombreInstitucion,
+        fechaPresentacion,
+        fechaPresentada,
+        usuario: ObtenerUsuario(),
+        status: 1,
+        fechacreacion: new Date(),
+      };
+
+      const registrardocumento = await addRegistro("Documentos", documento);
+      if (registrardocumento.statusreponse) {
+        Alert.alert(
+          "Registro Exitoso",
+          "El documento se ha registrado correctamente",
+          [
+            {
+              style: "cancel",
+              text: "Aceptar",
+              onPress: () => navigation.navigate("Documentos"),
+            },
+          ]
+        );
+      } else {
+        Alert.alert(
+          "Registro Fallido",
+          "Ha ocurrido un error al registrar el documento",
+          [
+            {
+              style: "cancel",
+              text: "Aceptar",
+            },
+          ]
+        );
+      }
+    }
+  };
+
   return (
     <KeyboardAwareScrollView style={styles.conteiner}>
       <View
         style={{
           borderBottomColor: "#f07218",
-          borderRightWidth: 2,
+          borderBottomWidth: 2,
           width: 100,
           marginTop: 20,
           alignSelf: "center",
         }}
       />
       <Input
-        placeholder="Nombre del documento"
+        placeholder="Nombre Documento"
         onChangeText={(text) => setNombreDocumento(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.nombreDocumento}
+      />
+      <Input
+        placeholder="Nombre Institución"
+        onChangeText={(text) => setNombreInstitucion(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.nombreInstitucion}
+      />
+      <Input
+        placeholder="Fecha de presentación"
+        onChangeText={(text) => setFechaPresentacion(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.fechaPresentacion}
+      />
+      <Input
+        placeholder="Fecha presentada"
+        onChangeText={(text) => setFechaPresentada(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.fechaPresentada}
+      />
+      <Button
+        title="Agregar Documento"
+        buttonStyle={styles.btnaddnew}
+        ref={btnref}
+        onPress={addDocumento}
       />
     </KeyboardAwareScrollView>
   );
@@ -48,5 +132,19 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 5,
     elevation: 3,
+  },
+  input: {
+    width: "90%",
+    borderRadius: 10,
+    borderColor: "#707070",
+    marginTop: 20,
+    paddingHorizontal: 20,
+    height: 50,
+  },
+  btnaddnew: {
+    backgroundColor: "#f07218",
+    marginTop: 20,
+    marginBottom: 40,
+    marginHorizontal: 20,
   },
 });
