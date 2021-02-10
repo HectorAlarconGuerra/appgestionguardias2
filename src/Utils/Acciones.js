@@ -46,3 +46,45 @@ export const ListarDocumentos = async () => {
 
   return documentos;
 };
+
+export const ListarSolicitudes = async () => {
+  let solicitudes = [];
+
+  await db
+    .collection("Solicitudes")
+    .where("status", "==", 1)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const solicitud = doc.data();
+        solicitud.id = doc.id;
+        solicitudes.push(solicitud);
+      });
+    })
+    .catch((err) => {
+      console.log("error");
+    });
+
+  return solicitudes;
+};
+
+export const ListarClientes = async () => {
+  let clientes = [];
+
+  await db
+    .collection("Clientes")
+    .where("status", "==", 1)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const cliente = doc.data();
+        cliente.id = doc.id;
+        clientes.push(cliente);
+      });
+    })
+    .catch((err) => {
+      console.log("error");
+    });
+
+  return clientes;
+};

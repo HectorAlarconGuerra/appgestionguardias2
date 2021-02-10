@@ -79,6 +79,30 @@ function Documento(props) {
         <Text style={styles.nombreInstitucion}>{nombreInstitucion}</Text>
         <Text style={styles.fechaPresentacion}>{fechaPresentacion}</Text>
       </View>
+      <View style={styles.iconbar}>
+        <View style={styles.iconedit}>
+          <Icon
+            type="material-community"
+            name="pencil-outline"
+            color="#FFA000"
+            style={styles.iconedit}
+            onPress={() => {
+              console.log("Editar");
+            }}
+          />
+        </View>
+        <View style={styles.icondelete}>
+          <Icon
+            type="material-community"
+            name="trash-can-outline"
+            color="#D32F2F"
+            style={styles.icondelete}
+            onPress={() => {
+              console.log("Eliminar");
+            }}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -121,6 +145,31 @@ const styles = StyleSheet.create({
   },
   fechaPresentacion: {
     fontSize: 16,
-    color: "#128c7e",
+    color: "#f07218",
+  },
+  iconbar: {
+    marginTop: 20,
+    flexDirection: "row",
+  },
+  icon: {
+    borderWidth: 1,
+    borderColor: "#25D366",
+    padding: 5,
+    borderRadius: 60,
+    marginLeft: 20,
+  },
+  iconedit: {
+    borderWidth: 1,
+    borderColor: "#FFA000",
+    padding: 5,
+    borderRadius: 50,
+    marginLeft: 20,
+  },
+  icondelete: {
+    borderWidth: 1,
+    borderColor: "#D32F2F",
+    padding: 5,
+    borderRadius: 50,
+    marginLeft: 20,
   },
 });
