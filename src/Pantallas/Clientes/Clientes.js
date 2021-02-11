@@ -11,7 +11,7 @@ export default function Clientes() {
 
   useEffect(() => {
     (async () => {
-      setclientes(await Listarclientes());
+      setclientes(await ListarClientes());
     })();
   }, []);
 
@@ -56,7 +56,7 @@ export default function Clientes() {
         color="#f07218"
         containerStyle={styles.btncontainer}
         onPress={() => {
-          navigation.navigate("RegistrarDocumento");
+          navigation.navigate("RegistrarCliente");
         }}
         reverse
       />
