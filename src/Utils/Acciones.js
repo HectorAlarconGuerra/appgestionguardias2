@@ -67,3 +67,24 @@ export const ListarClientes = async () => {
 
   return clientes;
 };
+
+export const ListarGuardias = async () => {
+  let guardias = [];
+
+  await db
+    .collection("Guardias")
+    .where("status", "==", 1)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const guardia = doc.data();
+        guardia.id = doc.id;
+        guardias.push(guardia);
+      });
+    })
+    .catch((err) => {
+      console.log("error");
+    });
+
+  return guardias;
+};
