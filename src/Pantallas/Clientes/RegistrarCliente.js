@@ -61,12 +61,12 @@ export default function RegistrarCliente() {
       if (registrardocumento.statusreponse) {
         Alert.alert(
           "Registro Exitoso",
-          "El documento se ha registrado correctamente",
+          "El cliente se ha registrado correctamente",
           [
             {
               style: "cancel",
               text: "Aceptar",
-              onPress: () => navigation.navigate("Documentos"),
+              onPress: () => navigation.navigate("Clientes"),
             },
           ]
         );
