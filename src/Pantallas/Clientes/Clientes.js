@@ -67,17 +67,19 @@ export default function Clientes() {
 function Cliente(props) {
   const { clientes, setclientes, navigation } = props;
   const {
-    nombreDocumento,
-    nombreInstitucion,
-    fechaPresentacion,
+    nombreCliente,
+    direccionCliente,
+    fechaInicioServicio,
+    tipoServicio,
+    numeroPuestos,
   } = clientes.item;
 
   return (
     <View style={styles.container}>
       <View style={styles.viewmedio}>
-        <Text style={styles.nombreDocumento}>{nombreDocumento}</Text>
-        <Text style={styles.nombreInstitucion}>{nombreInstitucion}</Text>
-        <Text style={styles.fechaPresentacion}>{fechaPresentacion}</Text>
+        <Text style={styles.nombreDocumento}>{nombreCliente}</Text>
+        <Text style={styles.nombreInstitucion}>{direccionCliente}</Text>
+        <Text style={styles.fechaPresentacion}>{fechaInicioServicio}</Text>
       </View>
       <View style={styles.iconbar}>
         <View style={styles.iconedit}>
