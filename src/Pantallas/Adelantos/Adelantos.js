@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { ListarAdelantos, eliminarProducto } from "../../Utils/Acciones";
 
@@ -14,6 +14,14 @@ export default function Adelantos() {
       setAdelantos(await ListarAdelantos());
     })();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        setAdelantos(await ListarAdelantos());
+      })();
+    }, [])
+  );
 
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
@@ -95,8 +103,24 @@ function Adelanto(props) {
             color="#D32F2F"
             style={styles.icondelete}
             onPress={async () => {
-              await eliminarProducto("Adelantos", id);
-              setAdelantos(await ListarAdelantos());
+              Alert.alert(
+                "Eliminar Producto",
+                "¿Estás seguro que deseas eliminar el adelanto",
+                [
+                  {
+                    style: "default",
+                    text: "Confirmar",
+                    onPress: async () => {
+                      await eliminarProducto("Adelantos", id);
+                      setAdelantos(await ListarAdelantos());
+                    },
+                  },
+                  {
+                    style: "default",
+                    text: "Salir",
+                  },
+                ]
+              );
             }}
           />
         </View>
