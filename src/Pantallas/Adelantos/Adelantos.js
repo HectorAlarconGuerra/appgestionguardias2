@@ -66,9 +66,9 @@ export default function Adelantos() {
 
 function Adelanto(props) {
   const { adelantos, setAdelantos, navigation } = props;
-  const { nombreGuardia, fechaAdelanto, montoAdelanto } = adelantos.item;
+  const { nombreGuardia, fechaAdelanto, montoAdelanto, id } = adelantos.item;
 
-  console.log(adelantos);
+  //console.log(adelantos);
   return (
     <View style={styles.container}>
       <View style={styles.viewmedio}>
