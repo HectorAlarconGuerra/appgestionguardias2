@@ -88,3 +88,73 @@ export const ListarGuardias = async () => {
 
   return guardias;
 };
+
+export const ListarTurnos = async () => {
+  let turnos = [];
+
+  await db
+    .collection("Turnos")
+    .where("status", "==", 1)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const turno = doc.data();
+        turno.id = doc.id;
+        turnos.push(turno);
+      });
+    })
+    .catch((err) => {
+      console.log("error");
+    });
+
+  return turnos;
+};
+
+export const ListarAdelantos = async () => {
+  let adelantos = [];
+
+  await db
+    .collection("Adelantos")
+    .where("status", "==", 1)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const adelanto = doc.data();
+        adelanto.id = doc.id;
+        adelantos.push(adelanto);
+      });
+    })
+    .catch((err) => {
+      console.log("error");
+    });
+
+  return adelantos;
+};
+
+export const actualizarRegistro = async (coleccion, documento, data) => {
+  let response = { statusresponse: false };
+
+  await db
+    .collection(coleccion)
+    .doc(documento)
+    .update(data)
+    .then((result) => (response.statusreponse = true))
+    .catch((err) => console.log(err));
+
+  return response;
+};
+
+export const eliminarProducto = async (coleccion, documento) => {
+  let response = { statusresponse: false };
+
+  await db
+    .collection(coleccion)
+    .doc(documento)
+    .delete()
+    .then((result) => (response.statusresponse = true))
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return response;
+};
