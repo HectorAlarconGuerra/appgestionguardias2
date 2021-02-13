@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { ListarTurnos } from "../../Utils/Acciones";
+import { ListarTurnos, eliminarProducto } from "../../Utils/Acciones";
 
 export default function Turnos() {
   const navigation = useNavigation();
@@ -14,6 +14,14 @@ export default function Turnos() {
       setTurnos(await ListarTurnos());
     })();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        setTurnos(await ListarTurnos());
+      })();
+    }, [])
+  );
 
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
@@ -71,6 +79,7 @@ function Turno(props) {
     puestoTrabajo,
     fechaTurno,
     horarioTurno,
+    id,
   } = turnos.item;
 
   return (
@@ -89,7 +98,7 @@ function Turno(props) {
             color="#FFA000"
             style={styles.iconedit}
             onPress={() => {
-              console.log("Editar");
+              navigation.navigate("EditarTurno", { id });
             }}
           />
         </View>
@@ -99,8 +108,25 @@ function Turno(props) {
             name="trash-can-outline"
             color="#D32F2F"
             style={styles.icondelete}
-            onPress={() => {
-              console.log("Eliminar");
+            onPress={async () => {
+              Alert.alert(
+                "Eliminar Turno",
+                "¿Estás seguro que deseas eliminar el turno",
+                [
+                  {
+                    style: "default",
+                    text: "Confirmar",
+                    onPress: async () => {
+                      await eliminarProducto("Turnos", id);
+                      setTurnos(await ListarTurnos());
+                    },
+                  },
+                  {
+                    style: "default",
+                    text: "Salir",
+                  },
+                ]
+              );
             }}
           />
         </View>
