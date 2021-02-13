@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { ListarClientes } from "../../Utils/Acciones";
+import { ListarClientes, eliminarProducto } from "../../Utils/Acciones";
 
 export default function Clientes() {
   const navigation = useNavigation();
@@ -14,6 +14,14 @@ export default function Clientes() {
       setclientes(await ListarClientes());
     })();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        setclientes(await ListarClientes());
+      })();
+    }, [])
+  );
 
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
@@ -72,6 +80,7 @@ function Cliente(props) {
     fechaInicioServicio,
     tipoServicio,
     numeroPuestos,
+    id,
   } = clientes.item;
 
   return (
@@ -89,7 +98,7 @@ function Cliente(props) {
             color="#FFA000"
             style={styles.iconedit}
             onPress={() => {
-              console.log("Editar");
+              navigation.navigate("EditarCliente", { id });
             }}
           />
         </View>
@@ -99,8 +108,25 @@ function Cliente(props) {
             name="trash-can-outline"
             color="#D32F2F"
             style={styles.icondelete}
-            onPress={() => {
-              console.log("Eliminar");
+            onPress={async () => {
+              Alert.alert(
+                "Eliminar Cliente",
+                "¿Estás seguro que deseas eliminar el cliente",
+                [
+                  {
+                    style: "default",
+                    text: "Confirmar",
+                    onPress: async () => {
+                      await eliminarProducto("Clientes", id);
+                      setclientes(await ListarClientes());
+                    },
+                  },
+                  {
+                    style: "default",
+                    text: "Salir",
+                  },
+                ]
+              );
             }}
           />
         </View>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { ListarDocumentos } from "../../Utils/Acciones";
+import { ListarDocumentos, eliminarProducto } from "../../Utils/Acciones";
 
 export default function Documentos() {
   const navigation = useNavigation();
@@ -14,6 +14,14 @@ export default function Documentos() {
       setDocumentos(await ListarDocumentos());
     })();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        setDocumentos(await ListarDocumentos());
+      })();
+    }, [])
+  );
 
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
@@ -70,6 +78,7 @@ function Documento(props) {
     nombreDocumento,
     nombreInstitucion,
     fechaPresentacion,
+    id,
   } = documentos.item;
 
   return (
@@ -87,7 +96,7 @@ function Documento(props) {
             color="#FFA000"
             style={styles.iconedit}
             onPress={() => {
-              console.log("Editar");
+              navigation.navigate("EditarDocumento", { id });
             }}
           />
         </View>
@@ -97,8 +106,25 @@ function Documento(props) {
             name="trash-can-outline"
             color="#D32F2F"
             style={styles.icondelete}
-            onPress={() => {
-              console.log("Eliminar");
+            onPress={async () => {
+              Alert.alert(
+                "Eliminar Producto",
+                "¿Estás seguro que deseas eliminar el adelanto",
+                [
+                  {
+                    style: "default",
+                    text: "Confirmar",
+                    onPress: async () => {
+                      await eliminarProducto("Documentos", id);
+                      setDocumentos(await ListarDocumentos());
+                    },
+                  },
+                  {
+                    style: "default",
+                    text: "Salir",
+                  },
+                ]
+              );
             }}
           />
         </View>

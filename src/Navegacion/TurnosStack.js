@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Turnos from "../Pantallas/Turnos/Turnos";
 import RegistrarTurno from "../Pantallas/Turnos/RegistrarTurno";
+import EditarTurno from "../Pantallas/Turnos/EditarTurno";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,11 @@ export default function TurnosStack() {
         component={RegistrarTurno}
         name="RegistrarTurno"
         options={{ title: "Registrar Turno" }}
+      />
+      <Stack.Screen
+        component={EditarTurno}
+        name="EditarTurno"
+        options={{ title: "Editar Turno" }}
       />
     </Stack.Navigator>
   );

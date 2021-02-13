@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Documentos from "../Pantallas/Documentos/Documentos";
 import RegistrarDocumento from "../Pantallas/Documentos/RegistrarDocumento";
+import EditarDocumento from "../Pantallas/Documentos/EditarDocumento";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,11 @@ export default function DocumentosStack() {
         component={RegistrarDocumento}
         name="RegistrarDocumento"
         options={{ title: "Registrar Documento" }}
+      />
+      <Stack.Screen
+        component={EditarDocumento}
+        name="EditarDocumento"
+        options={{ title: "Editar Documento" }}
       />
     </Stack.Navigator>
   );

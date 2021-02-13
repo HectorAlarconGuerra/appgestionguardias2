@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { ListarGuardias } from "../../Utils/Acciones";
+import { ListarGuardias, eliminarProducto } from "../../Utils/Acciones";
 
 export default function Guardias() {
   const navigation = useNavigation();
@@ -14,6 +14,14 @@ export default function Guardias() {
       setGuardias(await ListarGuardias());
     })();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        setGuardias(await ListarGuardias());
+      })();
+    }, [])
+  );
 
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
@@ -66,7 +74,7 @@ export default function Guardias() {
 
 function Guardia(props) {
   const { guardias, setGuardias, navigation } = props;
-  const { nombreGuardia, direccionGuardia, fechaIngreso } = guardias.item;
+  const { nombreGuardia, direccionGuardia, fechaIngreso, id } = guardias.item;
 
   return (
     <View style={styles.container}>
@@ -83,7 +91,7 @@ function Guardia(props) {
             color="#FFA000"
             style={styles.iconedit}
             onPress={() => {
-              console.log("Editar");
+              navigation.navigate("EditarGuardia", { id });
             }}
           />
         </View>
@@ -93,8 +101,25 @@ function Guardia(props) {
             name="trash-can-outline"
             color="#D32F2F"
             style={styles.icondelete}
-            onPress={() => {
-              console.log("Eliminar");
+            onPress={async () => {
+              Alert.alert(
+                "Eliminar Guardia",
+                "¿Estás seguro que deseas eliminar el guardia",
+                [
+                  {
+                    style: "default",
+                    text: "Confirmar",
+                    onPress: async () => {
+                      await eliminarProducto("Guardias", id);
+                      setGuardias(await ListarGuardias());
+                    },
+                  },
+                  {
+                    style: "default",
+                    text: "Salir",
+                  },
+                ]
+              );
             }}
           />
         </View>
