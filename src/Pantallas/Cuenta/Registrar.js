@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Login() {
+export default function Registrar() {
   return (
     <View>
-      <Text>Login</Text>
+      <Text>Registrar</Text>
     </View>
   );
 }

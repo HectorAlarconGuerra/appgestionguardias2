@@ -11,6 +11,7 @@ import SolicitudesStack from "./SolicitudesStack";
 import TurnosStack from "./TurnosStack";
 import GuardiasStack from "./GuardiasStack";
 import ClientesStack from "./ClientesStack";
+import PerfilStack from "./PerfilStack";
 import CustomDrawerContent from "../Components/CustomDrawerContent";
 
 //aquí importaremos algunos componentes más tarde
