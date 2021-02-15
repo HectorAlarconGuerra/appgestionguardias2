@@ -4,9 +4,65 @@ import { Icon, Input, Divider, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 export default function LoginForm() {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
   return (
     <View style={styles.container}>
-      <Text>Login Form</Text>
+      <View
+        style={{
+          borderBottomColor: "#f07218",
+          borderBottomWidth: 2,
+          width: 100,
+        }}
+      />
+      <Input
+        placeholder="Correo"
+        containerStyle={styles.input}
+        rightIcon={{
+          type: "material-community",
+          name: "at",
+          color: "#f07218",
+          onPress: () => alert("Hola"),
+        }}
+        leftIcon={{
+          type: "material-community",
+          name: "account-circle-outline",
+          color: "#f07218",
+        }}
+      />
+      <Input
+        placeholder="Contraseña"
+        containerStyle={styles.input}
+        leftIcon={{
+          type: "material-community",
+          name: "security",
+          color: "#f07218",
+        }}
+        rightIcon={{
+          type: "material-community",
+          name: "eye-outline",
+          color: "#f07218",
+          onPress: () => setshow(!show),
+        }}
+      />
+      <Button
+        title="ENTRAR"
+        containerStyle={styles.btnentrar}
+        buttonStyle={{ backgroundColor: "#f07218" }}
+      />
+      <Text style={styles.txtcrearcuenta}>
+        No Tienes Cuenta?
+        <Text> Crear Cuenta</Text>
+      </Text>
+      <Divider
+        style={{
+          backgroundColor: "#f07218",
+          height: 1,
+          width: "90%",
+          marginTop: 20,
+        }}
+      />
     </View>
   );
 }
