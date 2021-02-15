@@ -7,7 +7,7 @@ import RutasNoAutenticadas from "./src/Navegacion/RutasNoAutenticadas";
 LogBox.ignoreLogs(["Setting a timer"]);
 
 export default function App() {
-  return <RutasAutenticadas />;
+  return <RutasNoAutenticadas />;
 }
 
 const styles = StyleSheet.create({

@@ -123,6 +123,20 @@ export default function CustomDrawerContent(props) {
                 props.navigation.navigate("AdelantosStack");
               }}
             />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
+                  name="account-outline"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Cuenta"
+              onPress={() => {
+                props.navigation.navigate("PerfilStack");
+              }}
+            />
           </View>
         </View>
       </DrawerContentScrollView>

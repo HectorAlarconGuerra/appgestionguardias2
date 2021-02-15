@@ -71,6 +71,11 @@ const TabBar = () => {
         name="AdelantosStack"
         options={{ title: "S" }}
       />
+      <Tab.Screen
+        component={PerfilStack}
+        name="cuenta"
+        options={{ title: "C" }}
+      />
     </Tab.Navigator>
   );
 };
