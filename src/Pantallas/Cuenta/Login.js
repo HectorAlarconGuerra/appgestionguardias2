@@ -14,7 +14,7 @@ export default function Login() {
         source={require("../../../assets/logo.png")}
         style={styles.imglogo}
       />
-      <Text style={styles.textobaner}>Bienvenido!</Text>
+      <Text style={styles.textobaner}>¡Bienvenido!</Text>
       <LoginForm toastRef={toastRef} />
       <Toast ref={toastRef} position="center" opacity={0.9} />
     </View>

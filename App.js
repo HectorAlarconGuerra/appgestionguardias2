@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, LogBox } from "react-native";
 import RutasAutenticadas from "./src/Navegacion/RutasAutenticadas";
 import RutasNoAutenticadas from "./src/Navegacion/RutasNoAutenticadas";
 
-LogBox.ignoreLogs(["Setting a timer"]);
+LogBox.ignoreLogs(["Animated", "Setting a timer"]);
 
 export default function App() {
   return <RutasNoAutenticadas />;

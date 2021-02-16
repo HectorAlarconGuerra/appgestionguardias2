@@ -1,39 +1,49 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Icon, Input, Divider, Button } from "react-native-elements";
+import { StyleSheet, Text, View } from "react-native";
+import { Icon, Input, Button } from "react-native-elements";
 import { useNavigation, NavigationContainer } from "@react-navigation/native";
 import { validaremail } from "../Utils/Utils";
-import { isEmpty } from "lodash";
-//import { validarsesion } from "../Utils/Acciones";
+import { isEmpty, size } from "lodash";
 import * as firebase from "firebase";
+import Loading from "../Components/Loading";
 
-export default function LoginForm(props) {
+export default function RegisterForm(props) {
   const { toastRef } = props;
   const navigation = useNavigation();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [repetirpassword, setrepetirpassword] = useState("");
   const [show, setshow] = useState(false);
+  const [loading, setloading] = useState(false);
 
-  //validarsesion();
-
-  const iniciarsesion = () => {
-    if (isEmpty(email) || isEmpty(password)) {
-      toastRef.current.show("Debe ingresar los valores de email y password");
+  function crearcuenta() {
+    if (isEmpty(email) || isEmpty(password) || isEmpty(repetirpassword)) {
+      toastRef.current.show("Todos los campos son obligatotios");
     } else if (!validaremail(email)) {
-      toastRef.current.show("Ingrese un correo válido");
+      toastRef.current.show("Correo no es válido");
+    } else if (password !== repetirpassword) {
+      toastRef.current.show("Las contraseñas tienen que ser iguales ");
+    } else if (size(password) < 6) {
+      toastRef.current.show(
+        "Las contraseñas deben tener al menos 6 carácteres "
+      );
     } else {
+      setloading(true);
       firebase
         .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(() => {
-          console.log("Todo bien");
+        .createUserWithEmailAndPassword(email, password)
+        .then((response) => {
+          toastRef.current.show("Se ha creado el usuario correctamente");
+          setloading(false);
         })
         .catch((err) => {
-          console.log("error");
-          toastRef.current.show("Email o contraseña incorrectas");
+          setloading(false);
+          toastRef.current.show(
+            "Ha ocurrido un error o puede que este usuario esté registrado"
+          );
         });
     }
-  };
+  }
 
   return (
     <View style={styles.container}>
@@ -83,30 +93,39 @@ export default function LoginForm(props) {
         secureTextEntry={!show}
         value={password}
       />
+      <Input
+        placeholder="Repetir Contraseña"
+        containerStyle={styles.input}
+        leftIcon={{
+          type: "material-community",
+          name: "security",
+          color: "#f07218",
+        }}
+        rightIcon={{
+          type: "material-community",
+          name: show ? "eye-off-outline" : "eye-outline",
+          color: "#f07218",
+          onPress: () => setshow(!show),
+        }}
+        onChangeText={(text) => {
+          setrepetirpassword(text);
+        }}
+        secureTextEntry={!show}
+        value={repetirpassword}
+      />
       <Button
-        title="ENTRAR"
+        title="CREAR CUENTA"
         containerStyle={styles.btnentrar}
         buttonStyle={{ backgroundColor: "#f07218" }}
-        onPress={() => iniciarsesion()}
+        onPress={() => crearcuenta()}
       />
-      <Text style={styles.txtcrearcuenta}>
-        ¿No Tienes Cuenta?
-        <Text
-          style={styles.cuenta}
-          onPress={() => navigation.navigate("Registrar")}
-        >
-          {" "}
-          Crear Cuenta
-        </Text>
-      </Text>
-      <Divider
-        style={{
-          backgroundColor: "#f07218",
-          height: 1,
-          width: "90%",
-          marginTop: 20,
-        }}
+      <Button
+        title="INICIAR SESIÓN"
+        containerStyle={styles.btnentrar}
+        buttonStyle={{ backgroundColor: "#128C7E" }}
+        onPress={() => navigation.goBack()}
       />
+      <Loading isVisible={loading} text="Favor espere" />
     </View>
   );
 }
@@ -129,30 +148,5 @@ const styles = StyleSheet.create({
   btnentrar: {
     width: "90%",
     marginTop: 20,
-  },
-  txtcrearcuenta: {
-    marginTop: 20,
-  },
-  cuenta: {
-    color: "#f07218",
-    fontFamily: "Roboto",
-    fontSize: 15,
-  },
-  texto: {
-    fontWeight: "bold",
-    fontSize: 20,
-    marginTop: 20,
-    color: "#128c7e",
-  },
-  btnlogin: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-  },
-  btnloginsocial: {
-    backgroundColor: "#25d366",
-    paddingHorizontal: 40,
-    paddingVertical: 10,
-    borderRadius: 5,
   },
 });

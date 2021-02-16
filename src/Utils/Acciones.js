@@ -6,6 +6,16 @@ import "firebase/firestore";
 
 const db = firebase.firestore(firebaseapp);
 
+export const validarsesion = () => {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      console.log("usuario logeado");
+    } else {
+      console.log("no ha iniciado sesión");
+    }
+  });
+};
+
 export const ObtenerUsuario = () => {
   return firebase.auth().currentUser;
 };
