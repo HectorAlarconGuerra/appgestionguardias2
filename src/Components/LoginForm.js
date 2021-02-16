@@ -4,7 +4,7 @@ import { Icon, Input, Divider, Button } from "react-native-elements";
 import { useNavigation, NavigationContainer } from "@react-navigation/native";
 import { validaremail } from "../Utils/Utils";
 import { isEmpty } from "lodash";
-//import { validarsesion } from "../Utils/Acciones";
+import Loading from "../Components/Loading";
 import * as firebase from "firebase";
 
 export default function LoginForm(props) {
@@ -13,8 +13,7 @@ export default function LoginForm(props) {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [show, setshow] = useState(false);
-
-  //validarsesion();
+  const [loading, setloading] = useState(false);
 
   const iniciarsesion = () => {
     if (isEmpty(email) || isEmpty(password)) {
@@ -22,15 +21,21 @@ export default function LoginForm(props) {
     } else if (!validaremail(email)) {
       toastRef.current.show("Ingrese un correo válido");
     } else {
+      setloading(true);
+
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(() => {
-          console.log("Todo bien");
+        .then((response) => {
+          setloading(false);
+          toastRef.current.show("Ha iniciado sesión exitosamente");
+          console.log(firebase.auth().currentUser);
         })
         .catch((err) => {
-          console.log("error");
-          toastRef.current.show("Email o contraseña incorrectas");
+          setloading(false);
+          toastRef.current.show(
+            "Ha ocurrido un error al intentar iniciar sesión"
+          );
         });
     }
   };
@@ -107,6 +112,7 @@ export default function LoginForm(props) {
           marginTop: 20,
         }}
       />
+      <Loading isVisible={loading} text="Favor espere" />
     </View>
   );
 }

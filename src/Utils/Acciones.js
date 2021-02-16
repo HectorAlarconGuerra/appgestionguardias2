@@ -16,6 +16,10 @@ export const validarsesion = () => {
   });
 };
 
+export const cerrarsesion = () => {
+  firebase.auth().signOut();
+};
+
 export const ObtenerUsuario = () => {
   return firebase.auth().currentUser;
 };
