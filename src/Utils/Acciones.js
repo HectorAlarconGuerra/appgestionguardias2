@@ -6,12 +6,12 @@ import "firebase/firestore";
 
 const db = firebase.firestore(firebaseapp);
 
-export const validarsesion = () => {
+export const validarsesion = (setvalidarsesion) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log("usuario logeado");
+      setvalidarsesion(true);
     } else {
-      console.log("no ha iniciado sesión");
+      setvalidarsesion(false);
     }
   });
 };

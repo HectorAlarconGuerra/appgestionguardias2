@@ -28,7 +28,7 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
-                  name="cart-outline"
+                  name="book"
                   color={color}
                   size={size}
                   type="material-community"
@@ -42,7 +42,7 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
-                  name="store"
+                  name="book-account"
                   color={color}
                   size={size}
                   type="material-community"
@@ -70,7 +70,7 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
-                  name="account-outline"
+                  name="account"
                   color={color}
                   size={size}
                   type="material-community"
@@ -84,7 +84,7 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
-                  name="account-outline"
+                  name="badge-account-horizontal"
                   color={color}
                   size={size}
                   type="material-community"
@@ -98,7 +98,7 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
-                  name="account-outline"
+                  name="air-horn"
                   color={color}
                   size={size}
                   type="material-community"
@@ -112,7 +112,7 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
-                  name="account-outline"
+                  name="account-cash"
                   color={color}
                   size={size}
                   type="material-community"
@@ -126,7 +126,7 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
-                  name="account-outline"
+                  name="account-box"
                   color={color}
                   size={size}
                   type="material-community"
@@ -134,7 +134,7 @@ export default function CustomDrawerContent(props) {
               )}
               label="Cuenta"
               onPress={() => {
-                props.navigation.navigate("PerfilStack");
+                props.navigation.navigate("perfil");
               }}
             />
           </View>
@@ -152,7 +152,7 @@ export default function CustomDrawerContent(props) {
           )}
           label="Cerrar Sesión"
           onPress={() => {
-            //  cerrarsesion();
+             // cerrarsesion();
             console.log("Hola");
           }}
         />
