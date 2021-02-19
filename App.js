@@ -6,6 +6,8 @@ import RutasNoAutenticadas from "./src/Navegacion/RutasNoAutenticadas";
 //import { cerrarsesion } from "./src/Utils/Acciones";
 import { validarsesion } from "./src/Utils/Acciones";
 import Loading from "./src/Components/Loading";
+import RutasAutenticadasGuardias from "./src/Navegacion/RutasAutenticadasGuardias";
+import RutasAutenticadasClientes from "./src/Navegacion/RutasAutenticadasClientes";
 
 LogBox.ignoreLogs(["Animated", "Setting a timer"]);
 
@@ -26,7 +28,7 @@ export default function App() {
     return <Loading isVisible={loading} text="Cargando.." />;
   }
 
-  return user ? <RutasAutenticadas /> : <RutasNoAutenticadas />;
+  return user ? <RutasAutenticadasClientes /> : <RutasNoAutenticadas />;
 }
 
 const styles = StyleSheet.create({

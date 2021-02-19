@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Solicitudes from "../Pantallas/Solicitudes/Solicitudes";
+import RegistrarSolicitud from "../Pantallas/Solicitudes/RegistrarSolicitud";
 
 const Stack = createStackNavigator();
 
@@ -12,6 +13,11 @@ export default function SolicitudesStack() {
         component={Solicitudes}
         name="Solicitudes"
         options={{ title: "Solicitudes" }}
+      />
+      <Stack.Screen
+        component={RegistrarSolicitud}
+        name="RegistrarSolicitud"
+        options={{ title: "RegistrarSolicitud" }}
       />
     </Stack.Navigator>
   );
