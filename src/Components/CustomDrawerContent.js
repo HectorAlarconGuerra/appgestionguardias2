@@ -134,7 +134,7 @@ export default function CustomDrawerContent(props) {
               )}
               label="Cuenta"
               onPress={() => {
-                props.navigation.navigate("perfil");
+                props.navigation.navigate("CuentaStack");
               }}
             />
           </View>

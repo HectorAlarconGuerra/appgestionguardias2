@@ -12,6 +12,7 @@ import TurnosStack from "./TurnosStack";
 import GuardiasStack from "./GuardiasStack";
 import ClientesStack from "./ClientesStack";
 import PerfilStack from "./PerfilStack";
+import CuentaStack from "./CuentaStack";
 import CustomDrawerContent from "../Components/CustomDrawerContent";
 
 //aquí importaremos algunos componentes más tarde
@@ -72,7 +73,7 @@ const TabBar = () => {
         options={{ title: "S" }}
       />
       <Tab.Screen
-        component={PerfilStack}
+        component={CuentaStack}
         name="cuenta"
         options={{ title: "C" }}
       />

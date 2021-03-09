@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
+import React from 'react';
 import { StyleSheet, Text, View, LogBox } from "react-native";
 import RutasAutenticadas from "./src/Navegacion/RutasAutenticadas";
 import RutasNoAutenticadas from "./src/Navegacion/RutasNoAutenticadas";
@@ -13,22 +14,28 @@ LogBox.ignoreLogs(["Animated", "Setting a timer"]);
 
 //cerrarsesion();
 
+// export default function App() {
+//   const [user, setuser] = useState(false);
+//   const [loading, setloading] = useState(false);
+
+//   useEffect(() => {
+//     setloading(true);
+//     validarsesion(setuser);
+
+//     setloading(false);
+//   }, []);
+
+//   if (loading) {
+//     return <Loading isVisible={loading} text="Cargando.." />;
+//   }
+
+//   return user ? <RutasAutenticadas /> : <RutasNoAutenticadas />;
+// }
+
 export default function App() {
-  const [user, setuser] = useState(false);
-  const [loading, setloading] = useState(false);
 
-  useEffect(() => {
-    setloading(true);
-    validarsesion(setuser);
-
-    setloading(false);
-  }, []);
-
-  if (loading) {
-    return <Loading isVisible={loading} text="Cargando.." />;
-  }
-
-  return user ? <RutasAutenticadasClientes /> : <RutasNoAutenticadas />;
+  return <RutasAutenticadas />
+  
 }
 
 const styles = StyleSheet.create({
