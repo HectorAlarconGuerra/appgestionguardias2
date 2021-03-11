@@ -12,10 +12,19 @@ export default function RegisterForm() {
             <Input
                 placeholder="Contraseña"
                 containerStyle={styles.inputForm}
+                password={true}
+                secureTextEntry={true}
             />
             <Input
                 placeholder="Repetir contraseña"
                 containerStyle={styles.inputForm}
+                password={true}
+                secureTextEntry={true}
+            />
+            <Button
+              title="Unirse"
+              containerStyle={styles.btnContainerRegister}
+              buttonStyle={styles.btnRegister}
             />
         </View>
     )
@@ -32,6 +41,14 @@ const styles = StyleSheet.create({
     inputForm:{
         width: "100%",
         marginTop:20,
+    },
+    btnContainerRegister:{
+        marginTop: 20,
+        width: "95%",
+    },
+    btnRegister:{
+        backgroundColor: "#00a680",
+
     }
 
 });
