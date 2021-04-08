@@ -4,6 +4,7 @@ import { Icon, Input, Divider, Button } from "react-native-elements";
 import { useNavigation, NavigationContainer } from "@react-navigation/native";
 import { validaremail } from "../Utils/Utils";
 import { isEmpty } from "lodash";
+import { validarsesion } from "../Utils/Acciones";
 import Loading from "../Components/Loading";
 import * as firebase from "firebase";
 
@@ -14,7 +15,6 @@ export default function LoginForm(props) {
   const [password, setpassword] = useState("");
   const [show, setshow] = useState(false);
   const [loading, setloading] = useState(false);
-  
 
   const iniciarsesion = () => {
     if (isEmpty(email) || isEmpty(password)) {
@@ -113,6 +113,30 @@ export default function LoginForm(props) {
           marginTop: 20,
         }}
       />
+      <Text style={styles.texto}>O</Text>
+
+      <View style={styles.btnlogin}>
+        <TouchableOpacity style={styles.btnloginsocial}>
+          <Icon
+            size={24}
+            type="material-community"
+            name="google"
+            color="#fff"
+            backgroundColor="transparent"
+            // onPress={() => signInAsync()}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnloginsocial} onPress={() => logIn()}>
+          <Icon
+            size={24}
+            type="material-community"
+            name="facebook"
+            color="#fff"
+            backgroundColor="transparent"
+          />
+        </TouchableOpacity>
+      </View>
+
       <Loading isVisible={loading} text="Favor espere" />
     </View>
   );
@@ -157,7 +181,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   btnloginsocial: {
-    backgroundColor: "#25d366",
+    backgroundColor: "#f07218",
     paddingHorizontal: 40,
     paddingVertical: 10,
     borderRadius: 5,

@@ -9,7 +9,12 @@ const Stack = createStackNavigator();
 
 export default function DocumentosStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#f07218" },
+        headerTintColor: "#fff",
+      }}
+    >
       <Stack.Screen
         component={Documentos}
         name="Documentos"

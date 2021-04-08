@@ -13,13 +13,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["CAMERA_ROLL"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -27,6 +26,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "firebase": {
+        "apiKey": "AIzaSyAzIJ79shRRbVU2lzOw3WFqsmObXnSCIfA",
+        "authDomain": "gestionseguridadserproemcam.firebaseapp.com",
+        "projectId": "gestionseguridadserproemcam",
+        "storageBucket": "gestionseguridadserproemcam.appspot.com",
+        "messagingSenderId": "93139014679",
+        "appId": "1:93139014679:web:7df6d80f7ea5fd5cfdf852",
+        "measurementId": "G-KLHH31ZED1"
+      }
     }
   }
 }

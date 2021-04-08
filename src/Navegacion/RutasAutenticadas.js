@@ -6,13 +6,14 @@ import { Icon } from "react-native-elements";
 
 import AdelantosStack from "./AdelantosStack";
 import DocumentosStack from "./DocumentosStack";
+import DocumentoStack from "./DocumentoStack";
 import ReportesStack from "./ReportesStack";
 import SolicitudesStack from "./SolicitudesStack";
 import TurnosStack from "./TurnosStack";
 import GuardiasStack from "./GuardiasStack";
 import ClientesStack from "./ClientesStack";
 import PerfilStack from "./PerfilStack";
-import CuentaStack from "./CuentaStack";
+//import CuentaStack from "./CuentaStack";
 import CustomDrawerContent from "../Components/CustomDrawerContent";
 
 //aquí importaremos algunos componentes más tarde
@@ -40,6 +41,11 @@ const TabBar = () => {
         component={DocumentosStack}
         name="DocumentosStack"
         options={{ title: "D" }}
+      />
+      <Tab.Screen
+        component={DocumentoStack}
+        name="DocumentoStack"
+        options={{ title: "Do" }}
       />
       <Tab.Screen
         component={SolicitudesStack}
@@ -72,10 +78,15 @@ const TabBar = () => {
         name="AdelantosStack"
         options={{ title: "S" }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         component={CuentaStack}
         name="cuenta"
         options={{ title: "C" }}
+      /> */}
+      <Tab.Screen
+        component={PerfilStack}
+        name="cuenta"
+        options={{ title: "Cu" }}
       />
     </Tab.Navigator>
   );

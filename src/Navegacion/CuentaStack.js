@@ -1,30 +1,35 @@
-import React from 'react';
-import {createStackNavigator} from "@react-navigation/stack";
-import Account from "../Pantallas/Cuenta/Account";
-import Login2 from "../Pantallas/Cuenta/Login2";
-import Register from "../Pantallas/Cuenta/Register";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import ConfirmarNumero from "../Pantallas/Cuenta/ConfirmarNumero";
+import EnviarConfirmacion from "../Pantallas/Cuenta/EnviarConfirmacion";
 
 const Stack = createStackNavigator();
 
 export default function CuentaStack() {
-    return(
-        <Stack.Navigator>
-            <Stack.Screen
-               name="account"
-               component={Account}
-               options={{ title: "Mi cuenta"}}
-            />
-            <Stack.Screen
-               name="login"
-               component={Login2}
-               options={{ title: "Iniciar sesión"}}
-            />
-            <Stack.Screen
-               name="register"
-               component={Register}
-               options={{ title: "Registro"}}
-            />
-        </Stack.Navigator>
-    );
-    
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          component={EnviarConfirmacion}
+          name="enviar-informacion"
+          options={{
+            title: "Confirma Tu Número De Teléfono",
+            headerStyle: { backgroundColor: "#f07218" },
+            headerTintColor: "#fff",
+          }}
+        />
+        <Stack.Screen
+          component={ConfirmarNumero}
+          name="confirmar-movil"
+          options={{
+            title: "Confirmar Número",
+            headerStyle: { backgroundColor: "#f07218" },
+            headerTintColor: "#fff",
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }

@@ -6,6 +6,7 @@ import { validateEmail } from "../../Utils/validations";
 import { size, isEmpty } from "lodash";
 import * as firebase from "firebase";
 import { useNavigation } from "@react-navigation/native";
+import {addRegistro, ObtenerUsuario} from "../../Utils/Acciones";
 
 
 export default function RegisterForm(props) {
@@ -16,7 +17,7 @@ export default function RegisterForm(props) {
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
 
-    const onSubmit = () => {
+    const onSubmit = async() => {
         if (
             isEmpty(formData.email) ||
             isEmpty(formData.password) ||
@@ -37,7 +38,12 @@ export default function RegisterForm(props) {
             firebase
             .auth()
             .createUserWithEmailAndPassword(formData.email, formData.password)
-            .then(() => {
+            .then((userCredential) => {
+
+              const user = userCredential.user; 
+              const data = { ...user, rol: "1"}
+              const resultado =  addRegistro ('usuarios', data)
+              
               setLoading(false);
               navigation.navigate("account");
             })
@@ -45,6 +51,7 @@ export default function RegisterForm(props) {
               setLoading(false);
               toastRef.current.show("El email ya esta en uso, pruebe con otro");
             });
+         
           }
       };
     

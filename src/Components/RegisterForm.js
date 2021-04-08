@@ -6,6 +6,7 @@ import { validaremail } from "../Utils/Utils";
 import { isEmpty, size } from "lodash";
 import * as firebase from "firebase";
 import Loading from "../Components/Loading";
+import {addRegistro, ObtenerUsuario} from "../Utils/Acciones"
 
 export default function RegisterForm(props) {
   const { toastRef } = props;
@@ -16,7 +17,7 @@ export default function RegisterForm(props) {
   const [show, setshow] = useState(false);
   const [loading, setloading] = useState(false);
 
-  function crearcuenta() {
+  async function crearcuenta() {
     if (isEmpty(email) || isEmpty(password) || isEmpty(repetirpassword)) {
       toastRef.current.show("Todos los campos son obligatotios");
     } else if (!validaremail(email)) {
@@ -42,6 +43,10 @@ export default function RegisterForm(props) {
             "Ha ocurrido un error o puede que este usuario esté registrado"
           );
         });
+        const usuario = ObtenerUsuario();
+        const data = { ...usuario, rol: "1"}
+        const resultado = await addRegistro ('usuarios', data)
+        console.log(resultado)
     }
   }
 
