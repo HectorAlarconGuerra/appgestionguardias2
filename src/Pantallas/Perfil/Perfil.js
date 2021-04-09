@@ -157,7 +157,7 @@ export default function Perfil() {
   return (
     <View>
       <StatusBar backgroundColor="#f07218" />
-      <CabeceraBG />
+      <CabeceraBG displayName={displayName} />
       <HeaderAvatar
         usuario={usuario}
         imagenperfil={imagenperfil}
@@ -187,12 +187,14 @@ export default function Perfil() {
   );
 }
 
-function CabeceraBG() {
+function CabeceraBG(props) {
+  const { displayName } = props;
+  console.log(displayName);
   return (
     <View>
       <View style={styles.bg}>
         <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
-          nombre
+          {displayName}
         </Text>
       </View>
     </View>
