@@ -189,7 +189,6 @@ export default function Perfil() {
 
 function CabeceraBG(props) {
   const { displayName } = props;
-  console.log(displayName);
   return (
     <View>
       <View style={styles.bg}>
