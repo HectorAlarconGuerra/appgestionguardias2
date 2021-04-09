@@ -9,7 +9,7 @@ export default function Loading(props) {
   return (
     <Overlay isVisible={isVisible} overlayStyle={styles.overlay}>
       <View style={styles.view}>
-        <Grid size={60} color="#128C7E" />
+        <Grid size={60} color="#f07218" />
         {text && <Text style={styles.text}>{text}</Text>}
       </View>
     </Overlay>
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   overlay: {
     backgroundColor: "rgba(0,0,0,0.6)",
     borderWidth: 1,
-    borderColor: "#128C7E",
+    borderColor: "#f07218",
     borderRadius: 20,
     width: "90%",
     height: Dimensions.get("window").height / 2,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    color: "#128C7E",
+    color: "#f07218",
     marginTop: 20,
     fontWeight: "bold",
     fontSize: 24,

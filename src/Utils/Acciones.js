@@ -3,10 +3,13 @@
 import { firebaseapp } from "./Firebase.js";
 import { Platform } from "react-native";
 import * as firebase from "firebase";
-import "firebase/firestore";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
+import "firebase/firestore";
+import uuid from "random-uuid-v4";
+import { map } from "lodash";
+import { convertirFicheroBlob } from "./Utils";
 
 const db = firebase.firestore(firebaseapp);
 
@@ -155,6 +158,93 @@ export const addRegistro = async (coleccion, data) => {
     });
 
   return resultado;
+};
+
+export const subirImagenesBatch = async (imagenes, ruta) => {
+  const imagenesurl = [];
+
+  await Promise.all(
+    map(imagenes, async (image) => {
+      const blob = await convertirFicheroBlob(image);
+      const ref = firebase.storage().ref(ruta).child(uuid());
+
+      await ref.put(blob).then(async (result) => {
+        await firebase
+          .storage()
+          .ref(`${ruta}/${result.metadata.name}`)
+          .getDownloadURL()
+          .then((imagenurl) => {
+            imagenesurl.push(imagenurl);
+          });
+      });
+    })
+  );
+
+  return imagenesurl;
+};
+
+export const actualilzarPerfil = async (data) => {
+  let respuesta = false;
+  await firebase
+    .auth()
+    .currentUser.updateProfile(data)
+    .then((response) => {
+      respuesta = true;
+    });
+
+  return respuesta;
+};
+
+export const reautenticar = async (verificationId, code) => {
+  let response = { statusresponse: false };
+
+  const credenciales = new firebase.auth.PhoneAuthProvider.credential(
+    verificationId,
+    code
+  );
+
+  await firebase
+    .auth()
+    .currentUser.reauthenticateWithCredential(credenciales)
+    .then((resultado) => (response.statusresponse = true))
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return response;
+};
+
+export const actualizaremailfirebase = async (email) => {
+  let response = { statusresponse: false };
+  await firebase
+    .auth()
+    .currentUser.updateEmail(email)
+    .then((respuesta) => {
+      response.statusresponse = true;
+    })
+    .catch((err) => (response.statusresponse = false));
+  return response;
+};
+
+export const actualizarTelefono = async (verificationId, code) => {
+  let response = { statusresponse: false };
+  console.log(verificationId);
+  console.log(code);
+
+  const credenciales = new firebase.auth.PhoneAuthProvider.credential(
+    verificationId,
+    code
+  );
+
+  await firebase
+    .auth()
+    .currentUser.updatePhoneNumber(credenciales)
+    .then((resultado) => (response.statusresponse = true))
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return response;
 };
 
 export const ListarDocumentos = async () => {
