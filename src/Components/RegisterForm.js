@@ -6,7 +6,9 @@ import { validaremail } from "../Utils/Utils";
 import { isEmpty, size } from "lodash";
 import * as firebase from "firebase";
 import Loading from "../Components/Loading";
-import {addRegistro, ObtenerUsuario} from "../Utils/Acciones"
+import SelectedRol from "../Components/SelectedRol";
+import { addRegistro, ObtenerUsuario } from "../Utils/Acciones";
+import * as SecureStore from "expo-secure-store";
 
 export default function RegisterForm(props) {
   const { toastRef } = props;
@@ -16,6 +18,7 @@ export default function RegisterForm(props) {
   const [repetirpassword, setrepetirpassword] = useState("");
   const [show, setshow] = useState(false);
   const [loading, setloading] = useState(false);
+  const [rol, setrol] = useState(1);
 
   async function crearcuenta() {
     if (isEmpty(email) || isEmpty(password) || isEmpty(repetirpassword)) {
@@ -30,11 +33,17 @@ export default function RegisterForm(props) {
       );
     } else {
       setloading(true);
+      console.log("ROL");
+      console.log(rol);
+      await SecureStore.setItemAsync(
+        "ROL",
+        JSON.stringify({ rol: rol.toString() })
+      );
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((response) => {
-          toastRef.current.show("Se ha creado el usuario correctamente");
+          //toastRef.current.show("Se ha creado el usuario correctamente");
           setloading(false);
         })
         .catch((err) => {
@@ -43,10 +52,6 @@ export default function RegisterForm(props) {
             "Ha ocurrido un error o puede que este usuario esté registrado"
           );
         });
-        const usuario = ObtenerUsuario();
-        const data = { ...usuario, rol: "1"}
-        const resultado = await addRegistro ('usuarios', data)
-        console.log(resultado)
     }
   }
 
@@ -118,6 +123,26 @@ export default function RegisterForm(props) {
         secureTextEntry={!show}
         value={repetirpassword}
       />
+      <View
+        style={{
+          width: "90%",
+          height: 90,
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
+        <Text
+          style={{
+            width: "40%",
+            fontSize: 16,
+            fontStyle: "italic",
+            marginLeft: 5,
+          }}
+        >
+          Seleccione el Rol
+        </Text>
+        <SelectedRol state={rol} setstate={setrol} />
+      </View>
       <Button
         title="CREAR CUENTA"
         containerStyle={styles.btnentrar}
@@ -144,6 +169,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     alignItems: "center",
     paddingTop: 20,
+    paddingBottom: 30,
   },
   input: {
     width: "90%",

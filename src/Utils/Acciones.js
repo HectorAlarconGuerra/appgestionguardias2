@@ -8,7 +8,7 @@ import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 import "firebase/firestore";
 import uuid from "random-uuid-v4";
-import { map } from "lodash";
+import { map, _ } from "lodash";
 import { convertirFicheroBlob } from "./Utils";
 
 const db = firebase.firestore(firebaseapp);
@@ -52,11 +52,14 @@ export const cerrarsesion = () => {
 //   });
 // };
 
-export const validarPhone = (setphoneauth) => {
+export const validarPhone = (setphoneauth, setrol) => {
   db.collection("Usuarios")
     .doc(ObtenerUsuario().uid)
     .onSnapshot((snapshot) => {
       setphoneauth(snapshot.exists);
+      if (snapshot.exists) {
+        setrol(_.get(snapshot.data(), "rol", "0"));
+      }
     });
 };
 

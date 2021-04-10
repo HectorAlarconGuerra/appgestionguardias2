@@ -9,6 +9,7 @@ import {
   ObtenerUsuario,
   addRegistroEspecifico,
 } from "../../Utils/Acciones";
+import * as SecureStore from "expo-secure-store";
 
 export default function ConfirmarNumero(props) {
   const { route } = props;
@@ -34,6 +35,10 @@ export default function ConfirmarNumero(props) {
         email,
         phoneNumber,
       } = ObtenerUsuario();
+      let rol = await SecureStore.getItemAsync("ROL");
+
+      console.log("AQUI ESTA EL ROL");
+      console.log(JSON.parse(rol).rol);
 
       const registro = await addRegistroEspecifico("Usuarios", uid, {
         token,
@@ -42,6 +47,7 @@ export default function ConfirmarNumero(props) {
         email,
         phoneNumber,
         fechacreacion: new Date(),
+        rol: JSON.parse(rol).rol,
       });
       setloading(false);
     } else {
