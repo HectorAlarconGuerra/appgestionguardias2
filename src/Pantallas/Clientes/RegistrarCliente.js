@@ -52,7 +52,7 @@ export default function RegistrarCliente() {
         fechaInicioServicio,
         tipoServicio,
         numeroPuestos,
-        usuario: ObtenerUsuario(),
+        usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
       };

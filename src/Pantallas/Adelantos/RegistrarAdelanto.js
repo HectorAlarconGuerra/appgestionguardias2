@@ -40,7 +40,7 @@ export default function RegistrarAdelanto() {
         nombreGuardia,
         fechaAdelanto,
         montoAdelanto,
-        usuario: ObtenerUsuario(),
+        usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
       };

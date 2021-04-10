@@ -70,7 +70,7 @@ export default function RegistrarGuardia() {
         puestoTrabajo,
         bachiller,
         cursoGuardia,
-        usuario: ObtenerUsuario(),
+        usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
       };

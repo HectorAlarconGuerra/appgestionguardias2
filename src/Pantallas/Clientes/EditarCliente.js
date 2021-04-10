@@ -70,7 +70,7 @@ export default function EditarCliente(props) {
         fechaInicioServicio,
         tipoServicio,
         numeroPuestos,
-        usuario: ObtenerUsuario(),
+        usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
       };
