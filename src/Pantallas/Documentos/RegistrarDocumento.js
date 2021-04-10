@@ -10,6 +10,7 @@ import {
 } from "react-native-elements";
 import { map, size, filter, isEmpty } from "lodash";
 import { useNavigation } from "@react-navigation/native";
+import Loading from "../../Components/Loading";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { addRegistro, ObtenerUsuario } from "../../Utils/Acciones";
 
@@ -18,6 +19,7 @@ export default function RegistrarDocumento() {
   const [nombreInstitucion, setNombreInstitucion] = useState("");
   const [fechaPresentacion, setFechaPresentacion] = useState("");
   const [fechaPresentada, setFechaPresentada] = useState("");
+  const [imagenes, setimagenes] = useState([]);
   const [errores, setErrores] = useState({});
   const btnref = useRef();
   const navigation = useNavigation();
@@ -46,11 +48,11 @@ export default function RegistrarDocumento() {
         nombreInstitucion,
         fechaPresentacion,
         fechaPresentada,
-        usuario: ObtenerUsuario(),
+        usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
       };
-
+      console.log(documento);
       const registrardocumento = await addRegistro("Documentos", documento);
       if (registrardocumento.statusreponse) {
         Alert.alert(
