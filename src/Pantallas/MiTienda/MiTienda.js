@@ -3,14 +3,56 @@ import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
+import { ListarMisProductos } from "../../Utils/Acciones";
+
 import { ListarSolicitudes } from "../../Utils/Acciones";
 
-export default function Solicitudes() {
+export default function MiTienda() {
   const navigation = useNavigation();
   const [solicitudes, setsolicitudes] = useState({});
+  const [productos, setproductos] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      setproductos(await ListarMisProductos());
+    })();
+  }, []);
+
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
-      <Text>Servicios</Text>
+      {productos.length > 0 ? (
+        <FlatList
+          data={productos}
+          renderItem={(item) => (
+            <Producto
+              producto={item}
+              setproductos={setproductos}
+              navigation={navigation}
+            />
+          )}
+        />
+      ) : (
+        <View style={{ alignSelf: "center" }}>
+          <View
+            style={{
+              width: 120,
+              height: 120,
+              borderColor: "#f07218",
+              borderWidth: 1,
+              borderRadius: 60,
+              alignSelf: "center",
+            }}
+          >
+            <Icon
+              type="material-community"
+              name="cart-plus"
+              size={100}
+              color="#f07218"
+              style={{ margin: 10 }}
+            />
+          </View>
+        </View>
+      )}
       <Icon
         name="plus"
         type="material-community"
@@ -21,6 +63,16 @@ export default function Solicitudes() {
         }}
         reverse
       />
+    </View>
+  );
+}
+
+function Producto(props) {
+  const { producto, setproductos, navigation } = props;
+
+  return (
+    <View>
+      <Text>Soy un producto</Text>
     </View>
   );
 }

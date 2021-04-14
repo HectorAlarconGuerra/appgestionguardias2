@@ -42,7 +42,7 @@ LogBox.ignoreLogs(["Animated", "Setting a timer"]);
 export default function App() {
   const [user, setuser] = useState(false);
   const [loading, setloading] = useState(false);
-  //cerrarsesion();
+  //  cerrarsesion();
 
   useEffect(() => {
     setloading(true);
