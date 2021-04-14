@@ -69,10 +69,58 @@ export default function MiTienda() {
 
 function Producto(props) {
   const { producto, setproductos, navigation } = props;
+  const { descripcion, precio, id, imagenes, titulo } = producto.item;
 
   return (
-    <View>
-      <Text>Soy un producto</Text>
+    <View style={styles.container}>
+      <Image
+        source={{ uri: imagenes[0] }}
+        style={{ width: 150, height: 150, borderRadius: 10, marginLeft: 10 }}
+        resizeMethod="resize"
+      />
+      <View style={styles.viewmedio}>
+        <Text style={styles.titulo}>{titulo}</Text>
+        <Text style={styles.descripcion}>
+          {descripcion.length > 20 ? descripcion.substring(0, 20) : descripcion}
+          ...
+        </Text>
+        <Text style={styles.precio}> $ {parseFloat(precio).toFixed(2)}</Text>
+        <View style={styles.iconbar}>
+          <View style={styles.icon}>
+            <Icon
+              type="material-community"
+              name="check-outline"
+              color="#25d366"
+              style={styles.icon}
+              onPress={() => {
+                console.log("Dar de alta");
+              }}
+            />
+          </View>
+          <View style={styles.iconedit}>
+            <Icon
+              type="material-community"
+              name="pencil-outline"
+              color="#FFA000"
+              style={styles.iconedit}
+              onPress={() => {
+                console.log("Editar");
+              }}
+            />
+          </View>
+          <View style={styles.icondelete}>
+            <Icon
+              type="material-community"
+              name="trash-can-outline"
+              color="#D32F2F"
+              style={styles.icondelete}
+              onPress={() => {
+                console.log("Eliminar");
+              }}
+            />
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
@@ -91,8 +139,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 10,
     borderBottomColor: 0.5,
-    borderBottomColor: "#f07218",
-    shadowColor: "#f07218",
+    borderBottomColor: "#128C7E",
+    shadowColor: "#128C7E",
     shadowOffset: { height: 10 },
     shadowOpacity: 0.9,
   },
@@ -102,18 +150,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  nombreDocumento: {
+  titulo: {
     marginTop: 10,
     fontSize: 18,
     fontWeight: "700",
     textAlign: "center",
-    color: "#075e54",
+    color: "#f07218",
   },
-  nombreInstitucion: {
+  descripcion: {
     fontSize: 16,
     color: "#757575",
   },
-  fechaPresentacion: {
+  precio: {
     fontSize: 16,
     color: "#f07218",
   },
@@ -135,6 +183,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginLeft: 20,
   },
+
   icondelete: {
     borderWidth: 1,
     borderColor: "#D32F2F",
