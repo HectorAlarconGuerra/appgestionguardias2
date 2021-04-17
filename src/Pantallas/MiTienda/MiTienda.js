@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { ListarMisProductos } from "../../Utils/Acciones";
+import {
+  ListarMisProductos,
+  actualizarRegistro,
+  eliminarProducto,
+} from "../../Utils/Acciones";
 
 import { ListarSolicitudes } from "../../Utils/Acciones";
 
@@ -17,6 +21,14 @@ export default function MiTienda() {
       setproductos(await ListarMisProductos());
     })();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        setproductos(await ListarMisProductos());
+      })();
+    }, [])
+  );
 
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
@@ -93,7 +105,26 @@ function Producto(props) {
               color="#25d366"
               style={styles.icon}
               onPress={() => {
-                console.log("Dar de alta");
+                Alert.alert(
+                  "Dar de alta el producto",
+                  "¿Estás Seguro de que deseas dar de alta el producto",
+                  [
+                    {
+                      style: "default",
+                      text: "Confirmar",
+                      onPress: async () => {
+                        await actualizarRegistro("Productos", id, {
+                          status: 0,
+                        });
+                        setproductos(await ListarMisProductos());
+                      },
+                    },
+                    {
+                      style: "default",
+                      text: "Salir",
+                    },
+                  ]
+                );
               }}
             />
           </View>
@@ -104,7 +135,7 @@ function Producto(props) {
               color="#FFA000"
               style={styles.iconedit}
               onPress={() => {
-                console.log("Editar");
+                navigation.navigate("edit-product", { id });
               }}
             />
           </View>
@@ -114,8 +145,25 @@ function Producto(props) {
               name="trash-can-outline"
               color="#D32F2F"
               style={styles.icondelete}
-              onPress={() => {
-                console.log("Eliminar");
+              onPress={async () => {
+                Alert.alert(
+                  "Eliminar Producto",
+                  "¿Estás seguro que deseas eliminar el producto",
+                  [
+                    {
+                      style: "default",
+                      text: "Confirmar",
+                      onPress: async () => {
+                        await eliminarProducto("Productos", id);
+                        setproductos(await ListarMisProductos());
+                      },
+                    },
+                    {
+                      style: "default",
+                      text: "Salir",
+                    },
+                  ]
+                );
               }}
             />
           </View>

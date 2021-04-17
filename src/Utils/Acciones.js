@@ -425,3 +425,29 @@ export const obternerRegistroxID = async (coleccion, documento) => {
 
   return response;
 };
+
+export const ListarProductos = async () => {
+  const productoslist = [];
+  let index = 0;
+
+  await db
+    .collection("Productos")
+    .where("status", "==", 1)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const producto = doc.data();
+        producto.id = doc.id;
+        productoslist.push(producto);
+      });
+    })
+    .catch((err) => console.log(err));
+
+  for (const registro of productoslist) {
+    const usuario = await obternerRegistroxID("Usuarios", registro.usuario);
+    productoslist[index].usuario = usuario.data;
+    index++;
+  }
+
+  return productoslist;
+};
