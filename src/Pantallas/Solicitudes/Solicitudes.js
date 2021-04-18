@@ -24,6 +24,7 @@ export default function Solicitudes() {
   const [mensajes, setmensajes] = useState("Cargando...");
   const [notificaciones, setnotificaciones] = useState(0);
   const { photoURL } = ObtenerUsuario();
+  const [categoria, setcategoria] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -93,6 +94,9 @@ function Producto(props) {
     id,
     usuario,
   } = producto.item;
+
+  const { displayName, photoURL } = usuario;
+
   return (
     <TouchableOpacity
       style={styles.card}
@@ -109,12 +113,16 @@ function Producto(props) {
         <Text style={styles.vendidopor}>Vendido por</Text>
         <View style={styles.avatarbox}>
           <Avatar
-            source={require("../../../assets/avatar.jpg")}
+            source={
+              photoURL
+                ? { uri: photoURL }
+                : require("../../../assets/avatar.jpg")
+            }
             rounded
             size="large"
             style={styles.avatar}
           />
-          <Text style={styles.displayName}> DisplayName </Text>
+          <Text style={styles.displayName}> {displayName} </Text>
         </View>
         <Rating
           imageSize={15}
