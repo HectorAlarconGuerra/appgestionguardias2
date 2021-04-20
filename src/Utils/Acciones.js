@@ -10,8 +10,10 @@ import "firebase/firestore";
 import uuid from "random-uuid-v4";
 import { map, _ } from "lodash";
 import { convertirFicheroBlob } from "./Utils";
+import { FireSQL } from "firesql";
 
 const db = firebase.firestore(firebaseapp);
+const fireSQL = new FireSQL(firebase.firestore(), { includeId: "id" });
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -450,4 +452,43 @@ export const ListarProductos = async () => {
   }
 
   return productoslist;
+};
+
+export const listarProductosxCategoria = async (categoria) => {
+  const productoslist = [];
+  let index = 0;
+
+  await db
+    .collection("Productos")
+    .where("status", "==", 1)
+    .where("categoria", "==", categoria)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const producto = doc.data();
+        producto.id = doc.id;
+        productoslist.push(producto);
+      });
+    })
+    .catch((err) => console.log(err));
+
+  for (const registro of productoslist) {
+    const usuario = await obternerRegistroxID("Usuarios", registro.usuario);
+    productoslist[index].usuario = usuario.data;
+    index++;
+  }
+
+  return productoslist;
+};
+
+export const Buscar = async (search) => {
+  let productos = [];
+
+  await fireSQL
+    .query(`SELECT * FROM Productos WHERE titulo LIKE '${search}%' `)
+    .then((response) => {
+      productos = response;
+    });
+
+  return productos;
 };

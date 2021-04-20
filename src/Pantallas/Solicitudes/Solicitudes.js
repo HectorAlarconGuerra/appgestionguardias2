@@ -12,7 +12,12 @@ import { Icon, Avatar, Image, Rating, Badge } from "react-native-elements";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { size } from "lodash";
-import { ListarProductos, ObtenerUsuario } from "../../Utils/Acciones";
+import {
+  ListarProductos,
+  ObtenerUsuario,
+  listarProductosxCategoria,
+  Buscar,
+} from "../../Utils/Acciones";
 import Busqueda from "../../Components/Busqueda";
 //import { ListarSolicitudes } from "../../Utils/Acciones";
 
@@ -29,8 +34,21 @@ export default function Solicitudes() {
   useEffect(() => {
     (async () => {
       setproductlist(await ListarProductos());
+      console.log(await Buscar("Serv"));
     })();
   }, []);
+
+  const cargarFiltroxCategoria = async (categoria) => {
+    const listaproductos = await listarProductosxCategoria(categoria);
+    setproductlist(listaproductos);
+    if (listaproductos.length === 0) {
+      setmensajes("No se encontraron datos para la categoría " + categoria);
+    }
+  };
+
+  const actualizarProductos = async () => {
+    setproductlist(await ListarProductos());
+  };
 
   return (
     <View style={styles.frame}>
@@ -68,6 +86,62 @@ export default function Solicitudes() {
           <Busqueda />
         </KeyboardAwareScrollView>
       </View>
+      <View style={styles.categoriaview}>
+        <View style={styles.titulocategoria}>
+          <Text style={styles.categoriatext}> - CATEGORIAS -</Text>
+          {categoria.length > 0 && (
+            <TouchableOpacity
+              onPress={() => {
+                setcategoria("");
+                actualizarProductos();
+              }}
+            >
+              <Icon
+                type="material-community"
+                color="red"
+                name="close"
+                reverse
+                size={10}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={styles.categorialist}>
+          <BotonCategoria
+            categoriaboton="libros"
+            categoria={categoria}
+            icon="book-open-outline"
+            texto="Libros"
+            setcategoria={setcategoria}
+            cargarFiltroxCategoria={cargarFiltroxCategoria}
+          />
+          <BotonCategoria
+            categoriaboton="ideas"
+            categoria={categoria}
+            icon="lightbulb-on-outline"
+            texto="Ideas"
+            setcategoria={setcategoria}
+            cargarFiltroxCategoria={cargarFiltroxCategoria}
+          />
+          <BotonCategoria
+            categoriaboton="articulos"
+            categoria={categoria}
+            icon="cart-arrow-down"
+            texto="Artículos"
+            setcategoria={setcategoria}
+            cargarFiltroxCategoria={cargarFiltroxCategoria}
+          />
+          <BotonCategoria
+            categoriaboton="servicios"
+            categoria={categoria}
+            icon="account-outline"
+            texto="Servicios"
+            setcategoria={setcategoria}
+            cargarFiltroxCategoria={cargarFiltroxCategoria}
+          />
+        </View>
+      </View>
+
       {size(productlist) > 0 ? (
         <FlatList
           data={productlist}
@@ -132,6 +206,44 @@ function Producto(props) {
         />
         <Text style={styles.precio}>{precio.toFixed(2)} </Text>
       </View>
+    </TouchableOpacity>
+  );
+}
+
+function BotonCategoria(props) {
+  const {
+    categoriaboton,
+    categoria,
+    icon,
+    texto,
+    setcategoria,
+    cargarFiltroxCategoria,
+  } = props;
+  return (
+    <TouchableOpacity
+      style={
+        categoria === categoriaboton
+          ? styles.categoriahover
+          : styles.categoriabtn
+      }
+      onPress={() => {
+        setcategoria(categoriaboton);
+        cargarFiltroxCategoria(categoriaboton);
+      }}
+    >
+      <Icon
+        type="material-community"
+        name={icon}
+        size={30}
+        color={categoria === categoriaboton ? "#fff" : "#f07218"}
+      />
+      <Text
+        style={
+          categoria === categoriaboton ? styles.cattxthover : styles.cattxt
+        }
+      >
+        {texto}
+      </Text>
     </TouchableOpacity>
   );
 }
@@ -218,7 +330,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowColor: "#000",
-    backgroundColor: "#25d366",
+    backgroundColor: "#f07218",
     borderRadius: 40,
     elevation: 1,
   },
@@ -246,7 +358,7 @@ const styles = StyleSheet.create({
   cattxt: {
     fontSize: 12,
     fontStyle: "italic",
-    color: "#128C7E",
+    color: "#f07218",
   },
   categoriaview: {
     marginTop: 10,
@@ -257,7 +369,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   categoriatext: {
-    color: "#128c7e",
+    color: "#f07218",
     fontSize: 14,
     fontWeight: "bold",
   },
