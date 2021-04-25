@@ -34,9 +34,17 @@ export default function Solicitudes() {
   useEffect(() => {
     (async () => {
       setproductlist(await ListarProductos());
-      console.log(await Buscar("Serv"));
+      console.log(await Buscar("Vig"));
     })();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        setproductlist(await ListarProductos());
+      })();
+    }, [])
+  );
 
   const cargarFiltroxCategoria = async (categoria) => {
     const listaproductos = await listarProductosxCategoria(categoria);
@@ -83,7 +91,13 @@ export default function Solicitudes() {
               />
             </View>
           </View>
-          <Busqueda />
+          <Busqueda
+            setproductlist={setproductlist}
+            actualizarProductos={actualizarProductos}
+            setsearch={setsearch}
+            search={search}
+            setmensajes={setmensajes}
+          />
         </KeyboardAwareScrollView>
       </View>
       <View style={styles.categoriaview}>
