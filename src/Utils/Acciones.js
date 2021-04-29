@@ -543,3 +543,33 @@ export const setMensajeNotificacion = (token, titulo, body, data) => {
 
   return message;
 };
+
+export const ListarNotificaciones = async () => {
+  let respuesta = { statusresponse: false, data: [] };
+
+  let index = 0;
+
+  await db
+    .collection("Notificaciones")
+    .where("receiver", "==", ObtenerUsuario().uid)
+    .where("visto", "==", 0)
+    .get()
+    .then((response) => {
+      let datos;
+
+      response.forEach((doc) => {
+        datos = doc.data();
+        datos.id = doc.id;
+        respuesta.data.push(datos);
+      });
+      respuesta.statusresponse = true;
+    });
+
+  for (const notificacion of respuesta.data) {
+    const usuario = await obternerRegistroxID("Usuarios", notificacion.sender);
+    respuesta.data[index].sender = usuario.data;
+    index++;
+  }
+
+  return respuesta;
+};

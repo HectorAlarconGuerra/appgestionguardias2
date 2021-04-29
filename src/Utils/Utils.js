@@ -1,6 +1,7 @@
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import { Alert, Linking } from "react-native";
+import { size } from "lodash";
 
 export const validaremail = (text) => {
   let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

@@ -25,6 +25,7 @@
     "firebase": "^8.2.1",
     "firesql": "^2.0.2",
     "lodash": "^4.17.20",
+    "moment": "^2.29.1",
     "native-base": "^2.15.2",
     "random-uuid-v4": "^0.0.9",
     "react": "16.13.1",

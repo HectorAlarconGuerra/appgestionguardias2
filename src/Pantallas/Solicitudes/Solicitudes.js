@@ -17,6 +17,7 @@ import {
   ObtenerUsuario,
   listarProductosxCategoria,
   Buscar,
+  ListarNotificaciones,
 } from "../../Utils/Acciones";
 import Busqueda from "../../Components/Busqueda";
 //import { ListarSolicitudes } from "../../Utils/Acciones";
@@ -33,15 +34,24 @@ export default function Solicitudes() {
 
   useEffect(() => {
     (async () => {
+      setnotificaciones(0);
       setproductlist(await ListarProductos());
-      console.log(await Buscar("Vig"));
+      const consulta = await ListarNotificaciones();
+      if (consulta.statusresponse) {
+        setnotificaciones(size(consulta.data));
+      }
     })();
   }, []);
 
   useFocusEffect(
     useCallback(() => {
       (async () => {
+        setnotificaciones(0);
         setproductlist(await ListarProductos());
+        const consulta = await ListarNotificaciones();
+        if (consulta.statusresponse) {
+          setnotificaciones(size(consulta.data));
+        }
       })();
     }, [])
   );
@@ -83,12 +93,17 @@ export default function Solicitudes() {
                 name="bell-outline"
                 color="#fff"
                 size={30}
+                onPress={() => {
+                  navigation.navigate("mensajes");
+                }}
               />
-              <Badge
-                status="error"
-                containerStyle={{ position: "absolute", top: -4, right: -4 }}
-                value={2}
-              />
+              {notificaciones > 0 && (
+                <Badge
+                  status="error"
+                  containerStyle={{ position: "absolute", top: -4, right: -4 }}
+                  value={notificaciones}
+                />
+              )}
             </View>
           </View>
           <Busqueda
