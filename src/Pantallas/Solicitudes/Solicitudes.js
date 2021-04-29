@@ -82,6 +82,7 @@ export default function Solicitudes() {
                   ? { uri: photoURL }
                   : require("../../../assets/avatar.jpg")
               }
+              onPress={() => navigation.toggleDrawer()}
             />
             <Image
               source={require("../../../assets/logo.png")}

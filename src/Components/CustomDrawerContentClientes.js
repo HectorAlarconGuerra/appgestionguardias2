@@ -2,8 +2,11 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Avatar, Icon } from "react-native-elements";
+import { ObtenerUsuario, cerrarsesion } from "../Utils/Acciones";
 
 export default function CustomDrawerContentClientes(props) {
+  const { displayName, photoURL, email } = ObtenerUsuario();
+
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -25,7 +28,6 @@ export default function CustomDrawerContentClientes(props) {
           </View>
 
           <View style={styles.drawerSection}>
-            
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
@@ -40,7 +42,7 @@ export default function CustomDrawerContentClientes(props) {
                 props.navigation.navigate("SolicitudesStack");
               }}
             />
-            
+
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
@@ -70,7 +72,7 @@ export default function CustomDrawerContentClientes(props) {
           )}
           label="Cerrar Sesión"
           onPress={() => {
-             // cerrarsesion();
+            cerrarsesion();
             console.log("Hola");
           }}
         />

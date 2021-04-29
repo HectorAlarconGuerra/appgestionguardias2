@@ -20,7 +20,7 @@ export default function SelectedRol(props) {
     >
       <Picker.Item label="SUPERVISOR" value="1" />
       <Picker.Item label="CLIENTE" value="2" />
-      <Picker.Item label="SEGURIDAD" value="3" />
+      <Picker.Item label="GUARDIA" value="3" />
     </Picker>
   );
 }

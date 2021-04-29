@@ -113,7 +113,7 @@ export default function LoginForm(props) {
           marginTop: 20,
         }}
       />
-      <Text style={styles.texto}>O</Text>
+      {/* <Text style={styles.texto}>O</Text>
 
       <View style={styles.btnlogin}>
         <TouchableOpacity style={styles.btnloginsocial}>
@@ -135,7 +135,7 @@ export default function LoginForm(props) {
             backgroundColor="transparent"
           />
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <Loading isVisible={loading} text="Favor espere" />
     </View>

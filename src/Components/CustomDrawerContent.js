@@ -2,8 +2,11 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Avatar, Icon } from "react-native-elements";
+import { ObtenerUsuario, cerrarsesion } from "../Utils/Acciones";
 
 export default function CustomDrawerContent(props) {
+  const { displayName, photoURL, email } = ObtenerUsuario();
+
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -14,7 +17,7 @@ export default function CustomDrawerContent(props) {
                 rounded
                 size="medium"
                 source={require("../../assets/logo.png")}
-                //   onPress={() => navigation.toggleDrawer()}
+                //  onPress={() => navigation.toggleDrawer()}
               />
 
               <View style={{ marginLeft: 15, flexDirection: "column" }}>
@@ -152,7 +155,7 @@ export default function CustomDrawerContent(props) {
           )}
           label="Cerrar Sesión"
           onPress={() => {
-             // cerrarsesion();
+            cerrarsesion();
             console.log("Hola");
           }}
         />

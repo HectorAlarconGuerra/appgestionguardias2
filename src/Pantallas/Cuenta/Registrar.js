@@ -1,5 +1,12 @@
 import React, { useRef } from "react";
-import { StyleSheet, Text, View, Image, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  StatusBar,
+  ScrollView,
+} from "react-native";
 import Toast from "react-native-easy-toast";
 
 import RegisterForm from "../../Components/RegisterForm";
@@ -7,7 +14,7 @@ import RegisterForm from "../../Components/RegisterForm";
 export default function Registrar() {
   const toastRef = useRef();
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <StatusBar backgroundColor="#f07218" />
       <Image
         source={require("../../../assets/logo.png")}
@@ -16,7 +23,7 @@ export default function Registrar() {
       <Text style={styles.textobaner}>CREAR CUENTA</Text>
       <RegisterForm toastRef={toastRef} />
       <Toast ref={toastRef} position="center" opacity={0.9} />
-    </View>
+    </ScrollView>
   );
 }
 

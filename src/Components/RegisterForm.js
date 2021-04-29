@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Icon, Input, Button } from "react-native-elements";
 import { useNavigation, NavigationContainer } from "@react-navigation/native";
 import { validaremail } from "../Utils/Utils";
