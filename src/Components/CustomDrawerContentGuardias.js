@@ -16,7 +16,7 @@ export default function CustomDrawerContentGuardias(props) {
                 rounded
                 size="medium"
                 source={require("../../assets/logo.png")}
-                //   onPress={() => navigation.toggleDrawer()}
+                onPress={() => props.navigation.toggleDrawer()}
               />
 
               <View style={{ marginLeft: 15, flexDirection: "column" }}>
@@ -58,6 +58,20 @@ export default function CustomDrawerContentGuardias(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
+                  name="badge-account-horizontal"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Inicio Salida Turno"
+              onPress={() => {
+                props.navigation.navigate("InicioSalidaTurnoStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
                   name="air-horn"
                   color={color}
                   size={size}
@@ -83,7 +97,7 @@ export default function CustomDrawerContentGuardias(props) {
                 props.navigation.navigate("AdelantosStack");
               }}
             />
-            <DrawerItem
+            {/* <DrawerItem
               icon={({ color, size }) => (
                 <Icon
                   name="account-box"
@@ -96,7 +110,7 @@ export default function CustomDrawerContentGuardias(props) {
               onPress={() => {
                 props.navigation.navigate("perfil");
               }}
-            />
+            /> */}
           </View>
         </View>
       </DrawerContentScrollView>

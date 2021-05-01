@@ -3,11 +3,9 @@ import { StyleSheet, View, Text } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Avatar, Icon } from "react-native-elements";
 import { ObtenerUsuario, cerrarsesion } from "../Utils/Acciones";
-//import { useNavigation } from "@react-navigation/native";
 
 export default function CustomDrawerContent(props) {
   const { displayName, photoURL, email } = ObtenerUsuario();
-  //const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1 }}>

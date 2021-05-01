@@ -17,7 +17,7 @@ export default function CustomDrawerContentClientes(props) {
                 rounded
                 size="medium"
                 source={require("../../assets/logo.png")}
-                //   onPress={() => navigation.toggleDrawer()}
+                onPress={() => props.navigation.toggleDrawer()}
               />
 
               <View style={{ marginLeft: 15, flexDirection: "column" }}>

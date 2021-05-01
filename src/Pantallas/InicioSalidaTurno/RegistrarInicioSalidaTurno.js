@@ -13,13 +13,12 @@ import { useNavigation } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { addRegistro, ObtenerUsuario } from "../../Utils/Acciones";
 
-export default function RegistrarReporte() {
+export default function RegistrarInicioSalidaTurno() {
   const [nombreGuardia, setNombreGuardia] = useState("");
   const [puestoTrabajo, setPuestoTrabajo] = useState("");
-  const [reporte, setReporte] = useState("");
-  const [fechaReporte, setFechaReporte] = useState("");
   const [fechaTurno, setFechaTurno] = useState("");
-  const [horarioTurno, setHorarioTurno] = useState("");
+  const [horaEntrada, setHoraEntrada] = useState("");
+  const [horaSalida, setHoraSalida] = useState("");
   const [errores, setErrores] = useState({});
   const btnref = useRef();
   const navigation = useNavigation();
@@ -34,42 +33,50 @@ export default function RegistrarReporte() {
       setErrores({
         puestoTrabajo: "El campo puesro trabajo es obligatorio",
       });
-    } else if (isEmpty(reporte)) {
+    } else if (isEmpty(fechaTurno)) {
       setErrores({
-        reporte: "El campo reporte es obligatorio",
+        fechaTurno: "El campo fecha de turno es obligatorio",
       });
-    } else if (isEmpty(fechaReporte)) {
+    } else if (isEmpty(horaEntrada)) {
       setErrores({
-        fechaReporte: "El campo horario de turno es obligatorio",
+        horaEntrada: "El campo hora de entrada es obligatorio",
+      });
+    } else if (isEmpty(horaSalida)) {
+      setErrores({
+        horaSalida: "El campo hora de salida es obligatorio",
       });
     } else {
       const documento = {
         nombreGuardia,
         puestoTrabajo,
-        reporte,
-        fechaReporte,
+        fechaTurno,
+        horaEntrada,
+        horaSalida,
         usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
       };
 
-      const registrardocumento = await addRegistro("Reportes", documento);
+      const registrardocumento = await addRegistro(
+        "InicioSalidaTurnos",
+        documento
+      );
       if (registrardocumento.statusreponse) {
         Alert.alert(
           "Registro Exitoso",
-          "El reporte se ha registrado correctamente",
+          "El inicio y salida del turno se ha registrado correctamente",
           [
             {
               style: "cancel",
               text: "Aceptar",
-              onPress: () => navigation.navigate("Reportes"),
+              onPress: () => navigation.navigate("InicioSalidaTurno"),
             },
           ]
         );
       } else {
         Alert.alert(
           "Registro Fallido",
-          "Ha ocurrido un error al registrar el reporte",
+          "Ha ocurrido un error al registrar el turno",
           [
             {
               style: "cancel",
@@ -105,19 +112,25 @@ export default function RegistrarReporte() {
         errorMessage={errores.puestoTrabajo}
       />
       <Input
-        placeholder="Fecha del reporte"
-        onChangeText={(text) => setFechaReporte(text)}
+        placeholder="Fecha del turno"
+        onChangeText={(text) => setFechaTurno(text)}
         inputStyle={styles.input}
-        errorMessage={errores.fechaReporte}
+        errorMessage={errores.fechaTurno}
       />
       <Input
-        placeholder="Reporte de la guardia"
-        onChangeText={(text) => setReporte(text)}
+        placeholder="Hora de entrada"
+        onChangeText={(text) => setHoraEntrada(text)}
         inputStyle={styles.input}
-        errorMessage={errores.reporte}
+        errorMessage={errores.horarioTurno}
+      />
+      <Input
+        placeholder="Hora de salida"
+        onChangeText={(text) => setHoraSalida(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.horarioTurno}
       />
       <Button
-        title="Agregar Reporte"
+        title="Agregar Inicio y Salida"
         buttonStyle={styles.btnaddnew}
         ref={btnref}
         onPress={addDocumento}
@@ -125,6 +138,7 @@ export default function RegistrarReporte() {
     </KeyboardAwareScrollView>
   );
 }
+
 const styles = StyleSheet.create({
   conteiner: {
     flex: 1,

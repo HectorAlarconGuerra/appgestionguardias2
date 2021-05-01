@@ -3,33 +3,38 @@ import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { ListarReportes, eliminarProducto } from "../../Utils/Acciones";
+import {
+  ListarInicioSalidaTurno,
+  eliminarProducto,
+} from "../../Utils/Acciones";
 
-export default function Reportes() {
+export default function InicioSalidaTurno() {
   const navigation = useNavigation();
-  const [reportes, setReportes] = useState({});
+  const [turnos, setTurnos] = useState({});
+
   useEffect(() => {
     (async () => {
-      setReportes(await ListarReportes());
+      setTurnos(await ListarInicioSalidaTurno());
     })();
   }, []);
 
   useFocusEffect(
     useCallback(() => {
       (async () => {
-        setReportes(await ListarReportes());
+        setTurnos(await ListarInicioSalidaTurno());
       })();
     }, [])
   );
+
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
-      {reportes.length > 0 ? (
+      {turnos.length > 0 ? (
         <FlatList
-          data={reportes}
+          data={turnos}
           renderItem={(item) => (
-            <Reporte
-              reportes={item}
-              setReportes={setReportes}
+            <Turno
+              turnos={item}
+              setTurnos={setTurnos}
               navigation={navigation}
             />
           )}
@@ -62,7 +67,7 @@ export default function Reportes() {
         color="#f07218"
         containerStyle={styles.btncontainer}
         onPress={() => {
-          navigation.navigate("RegistrarReporte");
+          navigation.navigate("RegistrarInicioSalidaTurno");
         }}
         reverse
       />
@@ -70,23 +75,25 @@ export default function Reportes() {
   );
 }
 
-function Reporte(props) {
-  const { reportes, setReportes, navigation } = props;
+function Turno(props) {
+  const { turnos, setTurnos, navigation } = props;
   const {
     nombreGuardia,
     puestoTrabajo,
-    reporte,
-    fechaReporte,
+    fechaTurno,
+    horaEntrada,
+    horaSalida,
     id,
-  } = reportes.item;
+  } = turnos.item;
 
   return (
     <View style={styles.container}>
       <View style={styles.viewmedio}>
         <Text style={styles.nombreDocumento}>{nombreGuardia}</Text>
         <Text style={styles.nombreInstitucion}>{puestoTrabajo}</Text>
-        <Text style={styles.fechaPresentacion}>{fechaReporte}</Text>
-        <Text style={styles.fechaPresentacion}>{reporte}</Text>
+        <Text style={styles.fechaPresentacion}>{fechaTurno}</Text>
+        <Text style={styles.fechaPresentacion}>{horaEntrada}</Text>
+        <Text style={styles.fechaPresentacion}>{horaSalida}</Text>
       </View>
       <View style={styles.iconbar}>
         <View style={styles.iconedit}>
@@ -96,7 +103,7 @@ function Reporte(props) {
             color="#FFA000"
             style={styles.iconedit}
             onPress={() => {
-              navigation.navigate("EditarTurno", { id });
+              navigation.navigate("EditarInicioSalidaTurno", { id });
             }}
           />
         </View>
@@ -115,8 +122,8 @@ function Reporte(props) {
                     style: "default",
                     text: "Confirmar",
                     onPress: async () => {
-                      await eliminarProducto("Reportes", id);
-                      setReportes(await ListarReportes());
+                      await eliminarProducto("InicioSalidaTurnos", id);
+                      setTurnos(await ListarInicioSalidaTurno());
                     },
                   },
                   {

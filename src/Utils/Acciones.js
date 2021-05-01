@@ -358,6 +358,48 @@ export const ListarTurnos = async () => {
   return turnos;
 };
 
+export const ListarInicioSalidaTurno = async () => {
+  let iniciosalidaturno = [];
+
+  await db
+    .collection("InicioSalidaTurnos")
+    .where("status", "==", 1)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const iniciosalida = doc.data();
+        iniciosalida.id = doc.id;
+        iniciosalidaturno.push(iniciosalida);
+      });
+    })
+    .catch((err) => {
+      console.log("error");
+    });
+
+  return iniciosalidaturno;
+};
+
+export const ListarReportes = async () => {
+  let reportes = [];
+
+  await db
+    .collection("Reportes")
+    .where("status", "==", 1)
+    .get()
+    .then((response) => {
+      response.forEach((doc) => {
+        const reporte = doc.data();
+        reporte.id = doc.id;
+        reportes.push(reporte);
+      });
+    })
+    .catch((err) => {
+      console.log("error");
+    });
+
+  return reportes;
+};
+
 export const ListarAdelantos = async () => {
   let adelantos = [];
 
