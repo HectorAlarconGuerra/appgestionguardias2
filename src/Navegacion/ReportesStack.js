@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import * as Notifications from "expo-notifications";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { Icon } from "react-native-elements";
@@ -10,8 +11,42 @@ import EditarReporte from "../Pantallas/Reportes/EditarReporte";
 
 const Stack = createStackNavigator();
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+    };
+  },
+});
+
 export default function ReportesStack() {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const subscription = Notifications.addNotificationReceivedListener(
+      (notificacion) => {
+        console.log(notificacion);
+      }
+    );
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  const triggerNotificationHandler = () => {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Registrar el reporte",
+        body: "Reportar como se encuentra el puesto de guardia",
+        data: { reporte: "100% éxitos" },
+      },
+      trigger: {
+        seconds: 10,
+      },
+    });
+  };
+
   const buttonLeft = () => {
     return (
       <Icon
@@ -24,12 +59,28 @@ export default function ReportesStack() {
     );
   };
 
+  const buttonRight = () => {
+    return (
+      <Icon
+        type="material-community"
+        name="bell"
+        color="#f07218"
+        size={30}
+        onPress={() => triggerNotificationHandler()}
+      />
+    );
+  };
+
   return (
     <Stack.Navigator>
       <Stack.Screen
         component={Reportes}
         name="Reportes"
-        options={{ title: "Reportes", headerLeft: () => buttonLeft() }}
+        options={{
+          title: "Reportes",
+          headerLeft: () => buttonLeft(),
+          headerRight: () => buttonRight(),
+        }}
       />
       <Stack.Screen
         component={RegistrarReporte}
