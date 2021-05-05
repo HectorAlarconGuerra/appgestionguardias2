@@ -59,6 +59,20 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
+                  name="book-account"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Responder Solicitudes"
+              onPress={() => {
+                props.navigation.navigate("SolicitudesClienteStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
                   name="account-outline"
                   color={color}
                   size={size}

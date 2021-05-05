@@ -78,6 +78,7 @@ function Solicitud(props) {
     fecha,
     tipoServicio,
     numeroPuestos,
+    nombreGuardia,
     id,
   } = solicitudes.item;
 
@@ -89,6 +90,7 @@ function Solicitud(props) {
         <Text style={styles.fechaPresentacion}>{fecha}</Text>
         <Text style={styles.fechaPresentacion}>{tipoServicio}</Text>
         <Text style={styles.fechaPresentacion}>{numeroPuestos}</Text>
+        <Text style={styles.fechaPresentacion}>{nombreGuardia}</Text>
       </View>
       <View style={styles.iconbar}>
         <View style={styles.iconedit}>

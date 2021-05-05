@@ -65,6 +65,10 @@ export default function ResponderSolicitud(props) {
       setErrores({
         numeroPuestos: "El campo tipo de puestos es obligatorio",
       });
+    } else if (isEmpty(nombreGuardia)) {
+      setErrores({
+        nombreGuardia: "El campo tipo de puestos es obligatorio",
+      });
     } else {
       const documento = {
         nombreCliente,
@@ -72,6 +76,7 @@ export default function ResponderSolicitud(props) {
         fecha,
         tipoServicio,
         numeroPuestos,
+        nombreGuardia,
         usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
@@ -84,13 +89,13 @@ export default function ResponderSolicitud(props) {
       );
       if (registrardocumento.statusreponse) {
         Alert.alert(
-          "Actualización completa",
-          "La solicitud se ha actualizado correctamente",
+          "Respuesta completa",
+          "La respuesta ha sido registrada correctamente",
           [
             {
               style: "cancel",
               text: "Aceptar",
-              onPress: () => navigation.navigate("SolicitudesCliente"),
+              onPress: () => navigation.navigate("SolicitudesGuardia"),
             },
           ]
         );
@@ -153,6 +158,13 @@ export default function ResponderSolicitud(props) {
         inputStyle={styles.input}
         errorMessage={errores.numeroPuestos}
         value={numeroPuestos}
+      />
+      <Input
+        placeholder="Nombre Guardia"
+        onChangeText={(text) => setNombreGuardia(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.nombreGuardia}
+        value={nombreGuardia}
       />
       <Button
         title="Responder Solicitud"
