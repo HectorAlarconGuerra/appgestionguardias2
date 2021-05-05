@@ -56,7 +56,7 @@ export default function CustomDrawerContent(props) {
                 props.navigation.navigate("SolicitudesClienteStack");
               }}
             />
-            <DrawerItem
+            {/* <DrawerItem
               icon={({ color, size }) => (
                 <Icon
                   name="book-account"
@@ -69,7 +69,7 @@ export default function CustomDrawerContent(props) {
               onPress={() => {
                 props.navigation.navigate("SolicitudesClienteStack");
               }}
-            />
+            /> */}
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
