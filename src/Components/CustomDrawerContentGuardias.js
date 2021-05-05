@@ -94,7 +94,7 @@ export default function CustomDrawerContentGuardias(props) {
               )}
               label="Sueldos"
               onPress={() => {
-                props.navigation.navigate("AdelantosStack");
+                props.navigation.navigate("AdelantosGuardiasStack");
               }}
             />
             {/* <DrawerItem

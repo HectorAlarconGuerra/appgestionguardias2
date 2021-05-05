@@ -58,7 +58,7 @@ export default function AdelantosGuardias() {
           </View>
         </View>
       )}
-      <Icon
+      {/* <Icon
         name="plus"
         type="material-community"
         color="#f07218"
@@ -67,7 +67,7 @@ export default function AdelantosGuardias() {
           navigation.navigate("RegistrarAdelanto");
         }}
         reverse
-      />
+      /> */}
     </View>
   );
 }
@@ -84,7 +84,7 @@ function Adelanto(props) {
         <Text style={styles.nombreInstitucion}>{fechaAdelanto}</Text>
         <Text style={styles.fechaPresentacion}>{montoAdelanto}</Text>
       </View>
-      <View style={styles.iconbar}>
+      {/* <View style={styles.iconbar}>
         <View style={styles.iconedit}>
           <Icon
             type="material-community"
@@ -124,7 +124,7 @@ function Adelanto(props) {
             }}
           />
         </View>
-      </View>
+      </View> */}
     </View>
   );
 }

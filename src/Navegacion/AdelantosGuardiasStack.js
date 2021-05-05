@@ -4,13 +4,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
-import Adelantos from "../Pantallas/Adelantos/Adelantos";
-import RegistrarAdelanto from "../Pantallas/Adelantos/RegistrarAdelanto";
-import EditarAdelanto from "../Pantallas/Adelantos/EditarAdelanto";
+import AdelantosGuardias from "../Pantallas/AdelantosGuardias/AdelantosGuardias";
 
 const Stack = createStackNavigator();
 
-export default function AdelantosStack() {
+export default function AdelantosGuardiasStack() {
   const navigation = useNavigation();
   const buttonLeft = () => {
     return (
@@ -26,19 +24,9 @@ export default function AdelantosStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        component={Adelantos}
-        name="Adelantos"
+        component={AdelantosGuardias}
+        name="AdelantosGuardias"
         options={{ title: "Adelantos", headerLeft: () => buttonLeft() }}
-      />
-      <Stack.Screen
-        component={RegistrarAdelanto}
-        name="RegistrarAdelanto"
-        options={{ title: "Registrar Adelanto" }}
-      />
-      <Stack.Screen
-        component={EditarAdelanto}
-        name="EditarAdelanto"
-        options={{ title: "Editar Adelanto" }}
       />
     </Stack.Navigator>
   );

@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Icon } from "react-native-elements";
 
-import AdelantosStack from "./AdelantosStack";
+//import AdelantosStack from "./AdelantosStack";
+import AdelantosGuardiasStack from "./AdelantosGuardiasStack";
 import ReportesStack from "./ReportesStack";
 //import SolicitudesStack from "./SolicitudesStack";
 import SolicitudesClienteStack from "./SolicitudesClienteStack";
@@ -56,8 +57,8 @@ const TabBar = () => {
         options={{ title: "R" }}
       />
       <Tab.Screen
-        component={AdelantosStack}
-        name="AdelantosStack"
+        component={AdelantosGuardiasStack}
+        name="AdelantosGuardiasStack"
         options={{ title: "S" }}
       />
       <Tab.Screen
