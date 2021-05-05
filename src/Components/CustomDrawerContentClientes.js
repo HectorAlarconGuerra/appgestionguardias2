@@ -39,11 +39,11 @@ export default function CustomDrawerContentClientes(props) {
               )}
               label="Solicitudes"
               onPress={() => {
-                props.navigation.navigate("SolicitudesStack");
+                props.navigation.navigate("SolicitudesClienteStack");
               }}
             />
 
-            <DrawerItem
+            {/* <DrawerItem
               icon={({ color, size }) => (
                 <Icon
                   name="account-box"
@@ -56,7 +56,7 @@ export default function CustomDrawerContentClientes(props) {
               onPress={() => {
                 props.navigation.navigate("perfil");
               }}
-            />
+            /> */}
           </View>
         </View>
       </DrawerContentScrollView>
