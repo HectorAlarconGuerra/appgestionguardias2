@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import SolicitudesCliente from "../Pantallas/SolicitudesCliente/SolicitudesCliente";
 import RegistrarSolicitudesCliente from "../Pantallas/SolicitudesCliente/RegistrarSolicitudesCliente";
 import EditarSolicitudesCliente from "../Pantallas/SolicitudesCliente/EditarSolicitudesCliente";
+import ResponderSolicitud from "../Pantallas/SolicitudesCliente/ResponderSolicitud";
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,11 @@ export default function SolicitudesClienteStack() {
         component={EditarSolicitudesCliente}
         name="EditarSolicitudesCliente"
         options={{ title: "Editar solicitud" }}
+      />
+      <Stack.Screen
+        component={ResponderSolicitud}
+        name="ResponderSolicitud"
+        options={{ title: "Responder solicitud cliente" }}
       />
     </Stack.Navigator>
   );

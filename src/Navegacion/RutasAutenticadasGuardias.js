@@ -6,7 +6,8 @@ import { Icon } from "react-native-elements";
 
 import AdelantosStack from "./AdelantosStack";
 import ReportesStack from "./ReportesStack";
-import SolicitudesStack from "./SolicitudesStack";
+//import SolicitudesStack from "./SolicitudesStack";
+import SolicitudesClienteStack from "./SolicitudesClienteStack";
 import TurnosStack from "./TurnosStack";
 import PerfilStack from "./PerfilStack";
 import InicioSalidaTurnoStack from "./InicioSalidaTurnoStack";
@@ -34,8 +35,8 @@ const TabBar = () => {
       }}
     >
       <Tab.Screen
-        component={SolicitudesStack}
-        name="SolicitudesStack"
+        component={SolicitudesClienteStack}
+        name="SolicitudesClienteStack"
         options={{ title: "S" }}
       />
       <Tab.Screen

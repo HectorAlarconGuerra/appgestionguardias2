@@ -8,7 +8,8 @@ import AdelantosStack from "./AdelantosStack";
 import DocumentosStack from "./DocumentosStack";
 import DocumentoStack from "./DocumentoStack";
 import ReportesStack from "./ReportesStack";
-import SolicitudesStack from "./SolicitudesStack";
+//import SolicitudesStack from "./SolicitudesStack";
+import SolicitudesClienteStack from "./SolicitudesClienteStack";
 import TurnosStack from "./TurnosStack";
 import GuardiasStack from "./GuardiasStack";
 import ClientesStack from "./ClientesStack";
@@ -49,8 +50,8 @@ const TabBar = () => {
         options={{ title: "Do" }}
       />
       <Tab.Screen
-        component={SolicitudesStack}
-        name="SolicitudesStack"
+        component={SolicitudesClienteStack}
+        name="SolicitudesClienteStack"
         options={{ title: "S" }}
       />
       <Tab.Screen

@@ -96,7 +96,7 @@ function Reporte(props) {
             color="#FFA000"
             style={styles.iconedit}
             onPress={() => {
-              navigation.navigate("EditarTurno", { id });
+              navigation.navigate("EditarReporte", { id });
             }}
           />
         </View>
