@@ -1,6 +1,9 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { Icon } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
+
 import Documento from "../Pantallas/Documento/Documento";
 import AddDocument from "../Pantallas/Documento/AddDocument";
 import Contacto from "../Pantallas/Documento/Contacto";

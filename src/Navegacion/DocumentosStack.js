@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import * as Notifications from "expo-notifications";
 import { createStackNavigator } from "@react-navigation/stack";
+
+import { Icon } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 import Documentos from "../Pantallas/Documentos/Documentos";
 import RegistrarDocumento from "../Pantallas/Documentos/RegistrarDocumento";
@@ -7,7 +11,65 @@ import EditarDocumento from "../Pantallas/Documentos/EditarDocumento";
 
 const Stack = createStackNavigator();
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+    };
+  },
+});
+
 export default function DocumentosStack() {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const subscription = Notifications.addNotificationReceivedListener(
+      (notificacion) => {
+        console.log(notificacion);
+      }
+    );
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  const triggerNotificationHandler = () => {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Presentar documento",
+        body: "Verificar la fecha de presentación de la documentación",
+        data: { documento: "Presentado" },
+      },
+      trigger: {
+        seconds: 10,
+      },
+    });
+  };
+
+  const buttonLeft = () => {
+    return (
+      <Icon
+        type="material-community"
+        name="menu"
+        color="#fff"
+        size={30}
+        onPress={() => navigation.toggleDrawer()}
+      />
+    );
+  };
+
+  const buttonRight = () => {
+    return (
+      <Icon
+        type="material-community"
+        name="bell"
+        color="#fff"
+        size={30}
+        onPress={() => triggerNotificationHandler()}
+      />
+    );
+  };
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,7 +80,11 @@ export default function DocumentosStack() {
       <Stack.Screen
         component={Documentos}
         name="Documentos"
-        options={{ title: "Documentos" }}
+        options={{
+          title: "Documentos",
+          headerLeft: () => buttonLeft(),
+          headerRight: () => buttonRight(),
+        }}
       />
       <Stack.Screen
         component={RegistrarDocumento}

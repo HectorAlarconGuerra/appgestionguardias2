@@ -101,6 +101,20 @@ export default function CustomDrawerContent(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
+                  name="badge-account-horizontal"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Inicio Salida Turno"
+              onPress={() => {
+                props.navigation.navigate("InicioSalidaTurnoStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
                   name="air-horn"
                   color={color}
                   size={size}
@@ -126,7 +140,7 @@ export default function CustomDrawerContent(props) {
                 props.navigation.navigate("AdelantosStack");
               }}
             />
-            <DrawerItem
+            {/* <DrawerItem
               icon={({ color, size }) => (
                 <Icon
                   name="account-box"
@@ -139,7 +153,7 @@ export default function CustomDrawerContent(props) {
               onPress={() => {
                 props.navigation.navigate("CuentaStack");
               }}
-            />
+            /> */}
           </View>
         </View>
       </DrawerContentScrollView>
