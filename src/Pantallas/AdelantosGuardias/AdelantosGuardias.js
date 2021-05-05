@@ -3,33 +3,35 @@ import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { ListarSolicitudes, eliminarProducto } from "../../Utils/Acciones";
+import { ListarAdelantos, eliminarProducto } from "../../Utils/Acciones";
 
-export default function SolicitudesCliente() {
+export default function AdelantosGuardias() {
   const navigation = useNavigation();
-  const [solicitudes, setSolicitudes] = useState({});
+  const [adelantos, setAdelantos] = useState({});
+
   useEffect(() => {
     (async () => {
-      setSolicitudes(await ListarSolicitudes());
+      setAdelantos(await ListarAdelantos());
     })();
   }, []);
 
   useFocusEffect(
     useCallback(() => {
       (async () => {
-        setSolicitudes(await ListarSolicitudes());
+        setAdelantos(await ListarAdelantos());
       })();
     }, [])
   );
+
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
-      {solicitudes.length > 0 ? (
+      {adelantos.length > 0 ? (
         <FlatList
-          data={solicitudes}
+          data={adelantos}
           renderItem={(item) => (
-            <Solicitud
-              solicitudes={item}
-              setSolicitudes={setSolicitudes}
+            <Adelanto
+              adelantos={item}
+              setAdelantos={setAdelantos}
               navigation={navigation}
             />
           )}
@@ -62,7 +64,7 @@ export default function SolicitudesCliente() {
         color="#f07218"
         containerStyle={styles.btncontainer}
         onPress={() => {
-          navigation.navigate("RegistrarSolicitudesCliente");
+          navigation.navigate("RegistrarAdelanto");
         }}
         reverse
       />
@@ -70,31 +72,17 @@ export default function SolicitudesCliente() {
   );
 }
 
-function Solicitud(props) {
-  const { solicitudes, setSolicitudes, navigation } = props;
-  const {
-    nombreCliente,
-    direccion,
-    fecha,
-    tipoServicio,
-    numeroPuestos,
-    nombreGuardia,
-    precioServicio,
-    valorTotal,
-    id,
-  } = solicitudes.item;
+function Adelanto(props) {
+  const { adelantos, setAdelantos, navigation } = props;
+  const { nombreGuardia, fechaAdelanto, montoAdelanto, id } = adelantos.item;
 
+  //console.log(adelantos);
   return (
     <View style={styles.container}>
       <View style={styles.viewmedio}>
-        <Text style={styles.nombreDocumento}>{nombreCliente}</Text>
-        <Text style={styles.nombreInstitucion}>{direccion}</Text>
-        <Text style={styles.fechaPresentacion}>{fecha}</Text>
-        <Text style={styles.fechaPresentacion}>{tipoServicio}</Text>
-        <Text style={styles.fechaPresentacion}>{numeroPuestos}</Text>
-        <Text style={styles.fechaPresentacion}>{nombreGuardia}</Text>
-        <Text style={styles.fechaPresentacion}>{precioServicio}</Text>
-        <Text style={styles.fechaPresentacion}>{valorTotal}</Text>
+        <Text style={styles.nombreDocumento}>{nombreGuardia}</Text>
+        <Text style={styles.nombreInstitucion}>{fechaAdelanto}</Text>
+        <Text style={styles.fechaPresentacion}>{montoAdelanto}</Text>
       </View>
       <View style={styles.iconbar}>
         <View style={styles.iconedit}>
@@ -104,7 +92,7 @@ function Solicitud(props) {
             color="#FFA000"
             style={styles.iconedit}
             onPress={() => {
-              navigation.navigate("EditarSolicitudesCliente", { id });
+              navigation.navigate("EditarAdelanto", { id });
             }}
           />
         </View>
@@ -116,15 +104,15 @@ function Solicitud(props) {
             style={styles.icondelete}
             onPress={async () => {
               Alert.alert(
-                "Eliminar Turno",
-                "¿Estás seguro que deseas eliminar el turno",
+                "Eliminar Producto",
+                "¿Estás seguro que deseas eliminar el adelanto",
                 [
                   {
                     style: "default",
                     text: "Confirmar",
                     onPress: async () => {
-                      await eliminarProducto("Solicitudes", id);
-                      setSolicitudes(await ListarSolicitudes());
+                      await eliminarProducto("Adelantos", id);
+                      setAdelantos(await ListarAdelantos());
                     },
                   },
                   {
