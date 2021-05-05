@@ -38,7 +38,7 @@ export default function CustomDrawerContentGuardias(props) {
               )}
               label="Solicitudes"
               onPress={() => {
-                props.navigation.navigate("SolicitudesClienteStack");
+                props.navigation.navigate("SolicitudesGuardiaStack");
               }}
             />
             <DrawerItem
