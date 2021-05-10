@@ -31,14 +31,14 @@ export default function InicioSalidaTurnoStack() {
         component={InicioSalidaTurno}
         name="InicioSalidaTurno"
         options={{
-          title: "Inicio y Salida del turno",
+          title: "Inicio y salida del turno",
           headerLeft: () => buttonLeft(),
         }}
       />
       <Stack.Screen
         component={RegistrarInicioSalidaTurno}
         name="RegistrarInicioSalidaTurno"
-        options={{ title: "Registrar inicio y salida del Turno" }}
+        options={{ title: "Registrar inicio y salida" }}
       />
       <Stack.Screen
         component={EditarInicioSalidaTurno}

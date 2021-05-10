@@ -92,8 +92,10 @@ function Turno(props) {
         <Text style={styles.nombreDocumento}>{nombreGuardia}</Text>
         <Text style={styles.nombreInstitucion}>{puestoTrabajo}</Text>
         <Text style={styles.fechaPresentacion}>{fechaTurno}</Text>
-        <Text style={styles.fechaPresentacion}>{horaEntrada}</Text>
-        <Text style={styles.fechaPresentacion}>{horaSalida}</Text>
+        <Text style={styles.fechaPresentacion}>
+          Hora entrada: {horaEntrada}
+        </Text>
+        <Text style={styles.fechaPresentacion}>Hora salida: {horaSalida}</Text>
       </View>
       <View style={styles.iconbar}>
         <View style={styles.iconedit}>

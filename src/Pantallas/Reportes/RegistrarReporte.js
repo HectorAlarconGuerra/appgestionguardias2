@@ -19,7 +19,7 @@ export default function RegistrarReporte() {
   const [reporte, setReporte] = useState("");
   const [fechaReporte, setFechaReporte] = useState("");
   const [fechaTurno, setFechaTurno] = useState("");
-  const [horarioTurno, setHorarioTurno] = useState("");
+  const [horaReporte, setHoraReporte] = useState("");
   const [errores, setErrores] = useState({});
   const btnref = useRef();
   const navigation = useNavigation();
@@ -42,11 +42,16 @@ export default function RegistrarReporte() {
       setErrores({
         fechaReporte: "El campo horario de turno es obligatorio",
       });
+    } else if (isEmpty(horaReporte)) {
+      setErrores({
+        horaReporte: "El campo hora del reporte es obligatorio",
+      });
     } else {
       const documento = {
         nombreGuardia,
         puestoTrabajo,
         reporte,
+        horaReporte,
         fechaReporte,
         usuario: ObtenerUsuario().uid,
         status: 1,
@@ -109,6 +114,12 @@ export default function RegistrarReporte() {
         onChangeText={(text) => setFechaReporte(text)}
         inputStyle={styles.input}
         errorMessage={errores.fechaReporte}
+      />
+      <Input
+        placeholder="Hora del reporte"
+        onChangeText={(text) => setHoraReporte(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.horaReporte}
       />
       <Input
         placeholder="Reporte de la guardia"

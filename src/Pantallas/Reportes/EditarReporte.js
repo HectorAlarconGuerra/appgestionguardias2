@@ -23,9 +23,8 @@ export default function EditarReporte(props) {
   const [nombreGuardia, setNombreGuardia] = useState("");
   const [puestoTrabajo, setPuestoTrabajo] = useState("");
   const [reporte, setReporte] = useState("");
+  const [horaReporte, setHoraReporte] = useState("");
   const [fechaReporte, setFechaReporte] = useState("");
-  // const [fechaTurno, setFechaTurno] = useState("");
-  // const [horarioTurno, setHorarioTurno] = useState("");
   const [errores, setErrores] = useState({});
   const btnref = useRef();
   const navigation = useNavigation();
@@ -38,6 +37,7 @@ export default function EditarReporte(props) {
       setPuestoTrabajo(data.puestoTrabajo);
       setReporte(data.reporte);
       setFechaReporte(data.fechaReporte);
+      setHoraReporte(data.horaReporte);
     })();
   }, []);
 
@@ -59,12 +59,17 @@ export default function EditarReporte(props) {
       setErrores({
         fechaReporte: "El campo horario de turno es obligatorio",
       });
+    } else if (isEmpty(horaReporte)) {
+      setErrores({
+        horaReporte: "El campo hora del reporte es obligatorio",
+      });
     } else {
       const documento = {
         nombreGuardia,
         puestoTrabajo,
         reporte,
         fechaReporte,
+        horaReporte,
         usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
@@ -133,6 +138,13 @@ export default function EditarReporte(props) {
         inputStyle={styles.input}
         errorMessage={errores.fechaReporte}
         value={fechaReporte}
+      />
+      <Input
+        placeholder="Hora del reporte"
+        onChangeText={(text) => setHoraReporte(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.horaReporte}
+        value={horaReporte}
       />
       <Input
         placeholder="Reporte de la guardia"

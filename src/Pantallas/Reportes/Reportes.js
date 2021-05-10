@@ -77,6 +77,7 @@ function Reporte(props) {
     puestoTrabajo,
     reporte,
     fechaReporte,
+    horaReporte,
     id,
   } = reportes.item;
 
@@ -87,6 +88,7 @@ function Reporte(props) {
         <Text style={styles.nombreInstitucion}>{puestoTrabajo}</Text>
         <Text style={styles.fechaPresentacion}>{fechaReporte}</Text>
         <Text style={styles.fechaPresentacion}>{reporte}</Text>
+        <Text style={styles.fechaPresentacion}>{horaReporte}</Text>
       </View>
       <View style={styles.iconbar}>
         <View style={styles.iconedit}>
