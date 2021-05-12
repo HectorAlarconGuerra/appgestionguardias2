@@ -52,7 +52,7 @@ export default function CustomDrawerContentGuardias(props) {
               )}
               label="Turnos"
               onPress={() => {
-                props.navigation.navigate("TurnosStack");
+                props.navigation.navigate("TurnosGuardiasStack");
               }}
             />
             <DrawerItem

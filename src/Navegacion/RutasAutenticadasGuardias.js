@@ -4,13 +4,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Icon } from "react-native-elements";
 
-//import AdelantosStack from "./AdelantosStack";
 import AdelantosGuardiasStack from "./AdelantosGuardiasStack";
 import ReportesStack from "./ReportesStack";
 //import SolicitudesStack from "./SolicitudesStack";
 import SolicitudesClienteStack from "./SolicitudesClienteStack";
 import SolicitudesGuardiaStack from "./SolicitudesGuardiaStack";
-import TurnosStack from "./TurnosStack";
+import TurnosGuardiasStack from "./TurnosGuardiasStack";
 import PerfilStack from "./PerfilStack";
 import InicioSalidaTurnoStack from "./InicioSalidaTurnoStack";
 import CustomDrawerContentGuardias from "../Components/CustomDrawerContentGuardias";
@@ -42,8 +41,8 @@ const TabBar = () => {
         options={{ title: "S" }}
       />
       <Tab.Screen
-        component={TurnosStack}
-        name="TurnosStack"
+        component={TurnosGuardiasStack}
+        name="TurnosGuardiasStack"
         options={{ title: "T" }}
       />
       <Tab.Screen
