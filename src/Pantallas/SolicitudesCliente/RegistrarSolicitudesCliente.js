@@ -12,6 +12,8 @@ import { map, size, filter, isEmpty } from "lodash";
 import { useNavigation } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { addRegistro, ObtenerUsuario } from "../../Utils/Acciones";
+//import DateTimePickerModal from "react-native-modal-datetime-picker";
+//import moment from "moment";
 
 export default function RegistrarSolicitudesCliente() {
   const [nombreCliente, setNombreCliente] = useState("");
@@ -20,9 +22,13 @@ export default function RegistrarSolicitudesCliente() {
   //const [hora, setHora] = useState("");
   const [tipoServicio, setTipoServicio] = useState("");
   const [numeroPuestos, setNumeroPuestos] = useState("");
+  //const [formData, setFormData] = useState({});
+  const [isDatePicketVisible, setIsDatePicketVisible] = useState(false);
   const [errores, setErrores] = useState({});
   const btnref = useRef();
   const navigation = useNavigation();
+
+  //console.log(formData);
 
   const addDocumento = async () => {
     setErrores({});
@@ -86,6 +92,22 @@ export default function RegistrarSolicitudesCliente() {
     }
   };
 
+  // const hideDatePicker = () => {
+  //   setIsDatePicketVisible(false);
+  // };
+  // const handlerConfirm = (date) => {
+  //   const dateSolicitud = date;
+  //   dateSolicitud.setHours(0);
+  //   dateSolicitud.setMinutes(0);
+  //   dateSolicitud.setSeconds(0);
+  //   setFecha(dateSolicitud);
+  //   hideDatePicker();
+  // };
+
+  // const showDatePicker = () => {
+  //   setIsDatePicketVisible(true);
+  // };
+
   return (
     <KeyboardAwareScrollView style={styles.conteiner}>
       <View
@@ -109,6 +131,17 @@ export default function RegistrarSolicitudesCliente() {
         inputStyle={styles.input}
         errorMessage={errores.direccion}
       />
+      {/* <View style={[styles.inputFecha, styles.datepicker]}>
+        <Text style={styles.addButton} onPress={showDatePicker}>
+          {fecha ? moment(fecha).format("LL") : "Fecha de la solicitud"}
+        </Text>
+      </View>
+      <DateTimePickerModal
+        isVisible={isDatePicketVisible}
+        mode="date"
+        onConfirm={handlerConfirm}
+        onCancel={hideDatePicker}
+      /> */}
       <Input
         placeholder="Fecha"
         onChangeText={(text) => setFecha(text)}
@@ -154,10 +187,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 50,
   },
+  inputFecha: {
+    height: 50,
+    color: "#fff",
+    width: "80%",
+    marginBottom: 25,
+    backgroundColor: "#f07218",
+    paddingHorizontal: 20,
+    paddingRight: 50,
+    fontSize: 18,
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: "#1e3040",
+  },
+  datepicker: {
+    justifyContent: "center",
+  },
   btnaddnew: {
     backgroundColor: "#f07218",
     marginTop: 20,
     marginBottom: 40,
     marginHorizontal: 20,
+  },
+  addButton: {
+    fontSize: 18,
+    color: "#fff",
   },
 });

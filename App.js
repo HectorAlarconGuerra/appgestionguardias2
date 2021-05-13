@@ -44,7 +44,7 @@ export default function App() {
   const [loading, setloading] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
-  // cerrarsesion();
+  //cerrarsesion();
 
   useEffect(() => {
     setloading(true);
