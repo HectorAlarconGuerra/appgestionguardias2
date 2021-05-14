@@ -16,7 +16,7 @@ export default function CustomDrawerContent(props) {
               <Avatar
                 rounded
                 size="medium"
-                source={require("../../assets/logo.png")}
+                source={require("../../assets/serproemcam.png")}
                 onPress={() => props.navigation.toggleDrawer()}
               />
 

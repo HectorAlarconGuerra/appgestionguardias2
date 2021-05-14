@@ -11,7 +11,7 @@ export default function Login() {
     <View style={styles.container}>
       <StatusBar backgroundColor="#f07218" />
       <Image
-        source={require("../../../assets/logo.png")}
+        source={require("../../../assets/serproemcam.png")}
         style={styles.imglogo}
       />
       <Text style={styles.textobaner}>¡Bienvenido!</Text>
