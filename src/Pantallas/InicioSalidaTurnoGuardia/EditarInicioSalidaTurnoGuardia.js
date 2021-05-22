@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, Text, View, Alert, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Alert, TouchableOpacity } from "react-native";
 import {
   Input,
+  Text,
   Image,
   Button,
   Icon,
@@ -17,85 +18,78 @@ import {
   obternerRegistroxID,
 } from "../../Utils/Acciones";
 
-export default function ResponderSolicitud(props) {
+export default function EditarInicioSalidaTurnoGuardia(props) {
   const { route } = props;
   const { id } = route.params;
-  const [nombreCliente, setNombreCliente] = useState("");
   const [nombreGuardia, setNombreGuardia] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [fecha, setFecha] = useState("");
-  const [tipoServicio, setTipoServicio] = useState("");
-  const [numeroPuestos, setNumeroPuestos] = useState("");
+  const [puestoTrabajo, setPuestoTrabajo] = useState("");
+  const [fechaTurno, setFechaTurno] = useState("");
+  const [horaEntrada, setHoraEntrada] = useState("");
+  const [horaSalida, setHoraSalida] = useState("");
   const [errores, setErrores] = useState({});
   const btnref = useRef();
   const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
-      const response = await obternerRegistroxID("Solicitudes", id);
+      const response = await obternerRegistroxID("InicioSalidaTurnos", id);
       const { data } = response;
-      setNombreCliente(data.nombreCliente);
-      setDireccion(data.direccion);
-      setFecha(data.fecha);
-      setTipoServicio(data.tipoServicio);
-      setNumeroPuestos(data.numeroPuestos);
       setNombreGuardia(data.nombreGuardia);
+      setPuestoTrabajo(data.puestoTrabajo);
+      setFechaTurno(data.fechaTurno);
+      setHoraEntrada(data.horaEntrada);
+      setHoraSalida(data.horaSalida);
     })();
   }, []);
 
-  const EditSolicitud = async () => {
+  const editTurno = async () => {
     setErrores({});
-    if (isEmpty(nombreCliente)) {
+    if (isEmpty(nombreGuardia)) {
       setErrores({
-        nombreCliente: "El campo nombre cliente es obligatorio",
+        nombreGuardia: "El campo nombre guardia es obligatorio",
       });
-    } else if (isEmpty(direccion)) {
+    } else if (isEmpty(puestoTrabajo)) {
       setErrores({
-        direccion: "El campo dirección es obligatorio",
+        puestoTrabajo: "El campo puesro trabajo es obligatorio",
       });
-    } else if (isEmpty(fecha)) {
+    } else if (isEmpty(fechaTurno)) {
       setErrores({
-        fecha: "El campo fecha es obligatorio",
+        fechaTurno: "El campo fecha de turno es obligatorio",
       });
-    } else if (isEmpty(tipoServicio)) {
+    } else if (isEmpty(horaEntrada)) {
       setErrores({
-        tipoServicio: "El campo tipo de servicio es obligatorio",
+        horaEntrada: "El campo hora de entrada es obligatorio",
       });
-    } else if (isEmpty(numeroPuestos)) {
+    } else if (isEmpty(horaSalida)) {
       setErrores({
-        numeroPuestos: "El campo tipo de puestos es obligatorio",
-      });
-    } else if (isEmpty(nombreGuardia)) {
-      setErrores({
-        nombreGuardia: "El campo tipo de puestos es obligatorio",
+        horaSalida: "El campo hora de salida es obligatorio",
       });
     } else {
       const documento = {
-        nombreCliente,
-        direccion,
-        fecha,
-        tipoServicio,
-        numeroPuestos,
         nombreGuardia,
+        puestoTrabajo,
+        fechaTurno,
+        horaEntrada,
+        horaSalida,
         usuario: ObtenerUsuario().uid,
         status: 1,
         fechacreacion: new Date(),
       };
 
       const registrardocumento = await actualizarRegistro(
-        "Solicitudes",
+        "InicioSalidaTurnos",
         id,
         documento
       );
       if (registrardocumento.statusreponse) {
         Alert.alert(
-          "Respuesta completa",
-          "La respuesta ha sido registrada correctamente",
+          "Registro correcto",
+          "El inicio y salida del turno se ha registrado correctamente",
           [
             {
               style: "cancel",
               text: "Aceptar",
-              onPress: () => navigation.navigate("SolicitudesGuardia"),
+              onPress: () => navigation.navigate("InicioSalidaTurnoGuardia"),
             },
           ]
         );
@@ -113,6 +107,7 @@ export default function ResponderSolicitud(props) {
       }
     }
   };
+
   return (
     <KeyboardAwareScrollView style={styles.conteiner}>
       <View
@@ -125,53 +120,48 @@ export default function ResponderSolicitud(props) {
         }}
       />
       {/* <Input
-        placeholder="Nombre Cliente"
-        onChangeText={(text) => setNombreCliente(text)}
-        inputStyle={styles.input}
-        errorMessage={errores.nombreCliente}
-        value={nombreCliente}
-      />
-      <Input
-        placeholder="Dirección"
-        onChangeText={(text) => setDireccion(text)}
-        inputStyle={styles.input}
-        errorMessage={errores.direccion}
-        value={direccion}
-      />
-      <Input
-        placeholder="Fecha"
-        onChangeText={(text) => setFecha(text)}
-        inputStyle={styles.input}
-        errorMessage={errores.fecha}
-        value={fecha}
-      />
-      <Input
-        placeholder="Tipo servicio 24-12-8 horas"
-        onChangeText={(text) => setTipoServicio(text)}
-        inputStyle={styles.input}
-        errorMessage={errores.tipoServicio}
-        value={tipoServicio}
-      />
-      <Input
-        placeholder="Numero puestos"
-        onChangeText={(text) => setNumeroPuestos(text)}
-        inputStyle={styles.input}
-        errorMessage={errores.numeroPuestos}
-        value={numeroPuestos}
-      /> */}
-      <Text>Nombre del guardia con disponibilidad de tiempo</Text>
-      <Input
         placeholder="Nombre Guardia"
         onChangeText={(text) => setNombreGuardia(text)}
         inputStyle={styles.input}
         errorMessage={errores.nombreGuardia}
         value={nombreGuardia}
       />
+      <Input
+        placeholder="Puesto de trabajo"
+        onChangeText={(text) => setPuestoTrabajo(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.puestoTrabajo}
+        value={puestoTrabajo}
+      />
+      <Input
+        placeholder="Fecha del turno"
+        onChangeText={(text) => setFechaTurno(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.fechaTurno}
+        value={fechaTurno}
+      /> */}
+      <Text>Hora entrada</Text>
+      <Input
+        placeholder="Hora de entrada"
+        onChangeText={(text) => setHoraEntrada(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.horaEntrada}
+        value={horaEntrada}
+      />
+      <Text>Hora salida</Text>
+      <Input
+        placeholder="Hora de salida"
+        onChangeText={(text) => setHoraSalida(text)}
+        inputStyle={styles.input}
+        errorMessage={errores.horaSalida}
+        value={horaSalida}
+      />
+
       <Button
-        title="Responder Solicitud"
+        title="Registrar inicio salida turno"
         buttonStyle={styles.btnaddnew}
         ref={btnref}
-        onPress={EditSolicitud}
+        onPress={editTurno}
       />
     </KeyboardAwareScrollView>
   );

@@ -11,7 +11,7 @@ import SolicitudesClienteStack from "./SolicitudesClienteStack";
 import SolicitudesGuardiaStack from "./SolicitudesGuardiaStack";
 import TurnosGuardiasStack from "./TurnosGuardiasStack";
 import PerfilStack from "./PerfilStack";
-import InicioSalidaTurnoStack from "./InicioSalidaTurnoStack";
+import InicioSalidaTurnoGuardiaStack from "./InicioSalidaTurnoGuardiaStack";
 import CustomDrawerContentGuardias from "../Components/CustomDrawerContentGuardias";
 
 //aquí importaremos algunos componentes más tarde
@@ -46,8 +46,8 @@ const TabBar = () => {
         options={{ title: "T" }}
       />
       <Tab.Screen
-        component={InicioSalidaTurnoStack}
-        name="InicioSalidaTurnoStack"
+        component={InicioSalidaTurnoGuardiaStack}
+        name="InicioSalidaTurnoGuardiaStack"
         options={{ title: "I/S" }}
       />
       <Tab.Screen

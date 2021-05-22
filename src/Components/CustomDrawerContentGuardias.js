@@ -66,7 +66,7 @@ export default function CustomDrawerContentGuardias(props) {
               )}
               label="Inicio Salida Turno"
               onPress={() => {
-                props.navigation.navigate("InicioSalidaTurnoStack");
+                props.navigation.navigate("InicioSalidaTurnoGuardiaStack");
               }}
             />
             <DrawerItem

@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, View, Alert, TouchableOpacity } from "react-native";
+import React, { useState, useRef } from "react";
+import { StyleSheet, Text, View, Alert, TouchableOpacity } from "react-native";
 import {
   Input,
-  Text,
   Image,
   Button,
   Icon,
@@ -12,15 +11,9 @@ import {
 import { map, size, filter, isEmpty } from "lodash";
 import { useNavigation } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import {
-  actualizarRegistro,
-  ObtenerUsuario,
-  obternerRegistroxID,
-} from "../../Utils/Acciones";
+import { addRegistro, ObtenerUsuario } from "../../Utils/Acciones";
 
-export default function EditarInicioSalidaTurno(props) {
-  const { route } = props;
-  const { id } = route.params;
+export default function RegistrarInicioSalidaTurnoGuardia() {
   const [nombreGuardia, setNombreGuardia] = useState("");
   const [puestoTrabajo, setPuestoTrabajo] = useState("");
   const [fechaTurno, setFechaTurno] = useState("");
@@ -30,19 +23,7 @@ export default function EditarInicioSalidaTurno(props) {
   const btnref = useRef();
   const navigation = useNavigation();
 
-  useEffect(() => {
-    (async () => {
-      const response = await obternerRegistroxID("InicioSalidaTurnos", id);
-      const { data } = response;
-      setNombreGuardia(data.nombreGuardia);
-      setPuestoTrabajo(data.puestoTrabajo);
-      setFechaTurno(data.fechaTurno);
-      setHoraEntrada(data.horaEntrada);
-      setHoraSalida(data.horaSalida);
-    })();
-  }, []);
-
-  const editTurno = async () => {
+  const addDocumento = async () => {
     setErrores({});
     if (isEmpty(nombreGuardia)) {
       setErrores({
@@ -76,15 +57,14 @@ export default function EditarInicioSalidaTurno(props) {
         fechacreacion: new Date(),
       };
 
-      const registrardocumento = await actualizarRegistro(
+      const registrardocumento = await addRegistro(
         "InicioSalidaTurnos",
-        id,
         documento
       );
       if (registrardocumento.statusreponse) {
         Alert.alert(
-          "Actualización completa",
-          "El inicio y salida del turno se ha actualizado correctamente",
+          "Registro Exitoso",
+          "El inicio y salida del turno se ha registrado correctamente",
           [
             {
               style: "cancel",
@@ -95,8 +75,8 @@ export default function EditarInicioSalidaTurno(props) {
         );
       } else {
         Alert.alert(
-          "Actualización Fallida",
-          "Ha ocurrido un error al actualizar el turno",
+          "Registro Fallido",
+          "Ha ocurrido un error al registrar el turno",
           [
             {
               style: "cancel",
@@ -124,44 +104,36 @@ export default function EditarInicioSalidaTurno(props) {
         onChangeText={(text) => setNombreGuardia(text)}
         inputStyle={styles.input}
         errorMessage={errores.nombreGuardia}
-        value={nombreGuardia}
       />
       <Input
         placeholder="Puesto de trabajo"
         onChangeText={(text) => setPuestoTrabajo(text)}
         inputStyle={styles.input}
         errorMessage={errores.puestoTrabajo}
-        value={puestoTrabajo}
       />
       <Input
         placeholder="Fecha del turno"
         onChangeText={(text) => setFechaTurno(text)}
         inputStyle={styles.input}
         errorMessage={errores.fechaTurno}
-        value={fechaTurno}
       />
-      <Text>Hora entrada</Text>
       <Input
         placeholder="Hora de entrada"
         onChangeText={(text) => setHoraEntrada(text)}
         inputStyle={styles.input}
-        errorMessage={errores.horaEntrada}
-        value={horaEntrada}
+        errorMessage={errores.horarioTurno}
       />
-      <Text>Hora salida</Text>
       <Input
         placeholder="Hora de salida"
         onChangeText={(text) => setHoraSalida(text)}
         inputStyle={styles.input}
-        errorMessage={errores.horaSalida}
-        value={horaSalida}
+        errorMessage={errores.horarioTurno}
       />
-
       <Button
-        title="Editar inicio salida turno"
+        title="Agregar Inicio y Salida"
         buttonStyle={styles.btnaddnew}
         ref={btnref}
-        onPress={editTurno}
+        onPress={addDocumento}
       />
     </KeyboardAwareScrollView>
   );
