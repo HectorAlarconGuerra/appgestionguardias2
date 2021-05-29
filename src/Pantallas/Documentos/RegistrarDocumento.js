@@ -44,8 +44,8 @@ export default function RegistrarDocumento() {
       });
     } else {
       const documento = {
-        //   nombreDocumento,
-        //   nombreInstitucion,
+        nombreDocumento,
+        nombreInstitucion,
         fechaPresentacion,
         fechaPresentada,
         usuario: ObtenerUsuario().uid,
@@ -53,7 +53,7 @@ export default function RegistrarDocumento() {
         fechacreacion: new Date(),
       };
 
-      const registrardocumento = await addRegistro("agenda", documento);
+      const registrardocumento = await addRegistro("Documentos", documento);
       if (registrardocumento.statusreponse) {
         Alert.alert(
           "Registro Exitoso",

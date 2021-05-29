@@ -31,7 +31,7 @@ export default function InicioSalidaTurnoGuardiaStack() {
         component={InicioSalidaTurnoGuardia}
         name="InicioSalidaTurnoGuardia"
         options={{
-          title: "Inicio y salida del turno",
+          title: "Inicio y salida del turno..",
           headerLeft: () => buttonLeft(),
         }}
       />

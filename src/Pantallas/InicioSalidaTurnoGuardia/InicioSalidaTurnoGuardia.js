@@ -3,10 +3,7 @@ import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
 import { Icon } from "react-native-elements";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import {
-  ListarInicioSalidaTurno,
-  eliminarProducto,
-} from "../../Utils/Acciones";
+import { ListarTurnos, eliminarProducto } from "../../Utils/Acciones";
 
 export default function InicioSalidaTurnoGuardia() {
   const navigation = useNavigation();
@@ -14,14 +11,14 @@ export default function InicioSalidaTurnoGuardia() {
 
   useEffect(() => {
     (async () => {
-      setTurnos(await ListarInicioSalidaTurno());
+      setTurnos(await ListarTurnos());
     })();
   }, []);
 
   useFocusEffect(
     useCallback(() => {
       (async () => {
-        setTurnos(await ListarInicioSalidaTurno());
+        setTurnos(await ListarTurnos());
       })();
     }, [])
   );

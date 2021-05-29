@@ -47,9 +47,9 @@ export default function RegistrarInicioSalidaTurnoGuardia() {
       });
     } else {
       const documento = {
-        nombreGuardia,
-        puestoTrabajo,
-        fechaTurno,
+        //nombreGuardia,
+        // puestoTrabajo,
+        // fechaTurno,
         horaEntrada,
         horaSalida,
         usuario: ObtenerUsuario().uid,
@@ -57,10 +57,7 @@ export default function RegistrarInicioSalidaTurnoGuardia() {
         fechacreacion: new Date(),
       };
 
-      const registrardocumento = await addRegistro(
-        "InicioSalidaTurnos",
-        documento
-      );
+      const registrardocumento = await addRegistro("Turnos", documento);
       if (registrardocumento.statusreponse) {
         Alert.alert(
           "Registro Exitoso",

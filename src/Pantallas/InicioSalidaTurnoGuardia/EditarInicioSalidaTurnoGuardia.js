@@ -32,7 +32,7 @@ export default function EditarInicioSalidaTurnoGuardia(props) {
 
   useEffect(() => {
     (async () => {
-      const response = await obternerRegistroxID("InicioSalidaTurnos", id);
+      const response = await obternerRegistroxID("Turnos", id);
       const { data } = response;
       setNombreGuardia(data.nombreGuardia);
       setPuestoTrabajo(data.puestoTrabajo);
@@ -77,7 +77,7 @@ export default function EditarInicioSalidaTurnoGuardia(props) {
       };
 
       const registrardocumento = await actualizarRegistro(
-        "InicioSalidaTurnos",
+        "Turnos",
         id,
         documento
       );
