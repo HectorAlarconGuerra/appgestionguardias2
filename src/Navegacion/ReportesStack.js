@@ -42,7 +42,9 @@ export default function ReportesStack() {
         data: { reporte: "100% éxitos" },
       },
       trigger: {
-        seconds: 10,
+        seconds: 3540,
+        //  hour: 1,
+        //  minute: 3,
       },
     });
   };

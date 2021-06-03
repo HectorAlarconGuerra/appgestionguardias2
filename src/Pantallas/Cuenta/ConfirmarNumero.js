@@ -28,13 +28,8 @@ export default function ConfirmarNumero(props) {
     // console.log(await obtenerToken());
     if (resultado) {
       const token = await obtenerToken();
-      const {
-        uid,
-        displayName,
-        photoURL,
-        email,
-        phoneNumber,
-      } = ObtenerUsuario();
+      const { uid, displayName, photoURL, email, phoneNumber } =
+        ObtenerUsuario();
       let rol = await SecureStore.getItemAsync("ROL");
 
       console.log("AQUI ESTA EL ROL");
@@ -66,7 +61,7 @@ export default function ConfirmarNumero(props) {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../../assets/logo.png")}
+        source={require("../../../assets/serproemcam.png")}
         style={styles.imglogo}
       />
       <Text style={styles.titulo}>

@@ -42,7 +42,9 @@ export default function DocumentosStack() {
         data: { documento: "Presentado" },
       },
       trigger: {
-        seconds: 10,
+        // hour: 1,
+        // day: 7,
+        seconds: 3540,
       },
     });
   };

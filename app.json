@@ -13,7 +13,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -25,7 +27,8 @@
         "NOTIFICACION",
         "USER_FACING_NOTIFICATIONS"
       ],
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "package": "com.amplgdg.appgestionguardias"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -40,6 +43,7 @@
         "appId": "1:93139014679:web:7df6d80f7ea5fd5cfdf852",
         "measurementId": "G-KLHH31ZED1"
       }
-    }
+    },
+    "description": ""
   }
 }
