@@ -48,7 +48,7 @@ export default function SolicitudesSupervisor() {
           >
             <Icon
               type="material-community"
-              name="cart-plus"
+              name="account-check"
               size={100}
               color="#f07218"
               style={{ margin: 10 }}
@@ -90,11 +90,17 @@ function Solicitud(props) {
         <Text style={styles.nombreDocumento}>{nombreCliente}</Text>
         <Text style={styles.nombreInstitucion}>{direccion}</Text>
         <Text style={styles.fechaPresentacion}>{fecha}</Text>
-        <Text style={styles.fechaPresentacion}>{tipoServicio}</Text>
-        <Text style={styles.fechaPresentacion}>{numeroPuestos}</Text>
-        <Text style={styles.fechaPresentacion}>{nombreGuardia}</Text>
-        <Text style={styles.fechaPresentacion}>{precioServicio}</Text>
-        <Text style={styles.fechaPresentacion}>{valorTotal}</Text>
+        <Text style={styles.fechaPresentacion}>
+          Servicio {tipoServicio} horas
+        </Text>
+        <Text style={styles.fechaPresentacion}>
+          Número puestos: {numeroPuestos}
+        </Text>
+        <Text style={styles.fechaPresentacion}>Guardia {nombreGuardia}</Text>
+        <Text style={styles.fechaPresentacion}>
+          Valor servicio: {precioServicio}
+        </Text>
+        <Text style={styles.fechaPresentacion}>Valor total: {valorTotal}</Text>
       </View>
       <View style={styles.iconbar}>
         <View style={styles.iconedit}>

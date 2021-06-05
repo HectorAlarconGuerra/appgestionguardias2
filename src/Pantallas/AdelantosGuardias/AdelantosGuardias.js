@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
-import { Icon } from "react-native-elements";
+import { Avatar, Icon } from "react-native-elements";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { ListarAdelantos, eliminarProducto } from "../../Utils/Acciones";
@@ -50,11 +50,17 @@ export default function AdelantosGuardias() {
           >
             <Icon
               type="material-community"
-              name="cart-plus"
+              name="cash"
               size={100}
               color="#f07218"
               style={{ margin: 10 }}
             />
+            {/* <Avatar
+              rounded
+              size="xlarge"
+              source={require("../../../assets/serproemcam.png")}
+              // onPress={() => props.navigation.toggleDrawer()}
+            /> */}
           </View>
         </View>
       )}

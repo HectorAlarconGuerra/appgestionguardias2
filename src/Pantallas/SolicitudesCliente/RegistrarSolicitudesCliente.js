@@ -143,7 +143,7 @@ export default function RegistrarSolicitudesCliente() {
         onCancel={hideDatePicker}
       /> */}
       <Input
-        placeholder="Fecha"
+        placeholder="Fecha día/mes/año"
         onChangeText={(text) => setFecha(text)}
         inputStyle={styles.input}
         errorMessage={errores.fecha}

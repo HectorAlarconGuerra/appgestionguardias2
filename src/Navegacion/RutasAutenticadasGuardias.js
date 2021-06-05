@@ -22,7 +22,7 @@ const Drawer = createDrawerNavigator();
 const TabBar = () => {
   return (
     <Tab.Navigator
-      initialRouteName="seguridad"
+      initialRouteName="ReportesStack"
       tabBarOptions={{
         inactiveTintColor: "#fff",
         activeTintColor: "#fff",

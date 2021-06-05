@@ -30,15 +30,15 @@ export default function CustomDrawerContentGuardias(props) {
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
-                  name="book-account"
+                  name="air-horn"
                   color={color}
                   size={size}
                   type="material-community"
                 />
               )}
-              label="Solicitudes"
+              label="Reportes"
               onPress={() => {
-                props.navigation.navigate("SolicitudesGuardiaStack");
+                props.navigation.navigate("ReportesStack");
               }}
             />
             <DrawerItem
@@ -69,20 +69,7 @@ export default function CustomDrawerContentGuardias(props) {
                 props.navigation.navigate("InicioSalidaTurnoGuardiaStack");
               }}
             />
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon
-                  name="air-horn"
-                  color={color}
-                  size={size}
-                  type="material-community"
-                />
-              )}
-              label="Reportes"
-              onPress={() => {
-                props.navigation.navigate("ReportesStack");
-              }}
-            />
+
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon
@@ -95,6 +82,20 @@ export default function CustomDrawerContentGuardias(props) {
               label="Sueldos"
               onPress={() => {
                 props.navigation.navigate("AdelantosGuardiasStack");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon
+                  name="book-account"
+                  color={color}
+                  size={size}
+                  type="material-community"
+                />
+              )}
+              label="Solicitudes"
+              onPress={() => {
+                props.navigation.navigate("SolicitudesGuardiaStack");
               }}
             />
             {/* <DrawerItem

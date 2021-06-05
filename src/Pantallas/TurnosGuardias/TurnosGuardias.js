@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
-import { Icon } from "react-native-elements";
+import { Avatar, Icon } from "react-native-elements";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { ListarTurnos, eliminarProducto } from "../../Utils/Acciones";
@@ -50,11 +50,17 @@ export default function TurnosGuardias() {
           >
             <Icon
               type="material-community"
-              name="cart-plus"
+              name="timer-sand"
               size={100}
               color="#f07218"
               style={{ margin: 10 }}
             />
+            {/* <Avatar
+              rounded
+              size="xlarge"
+              source={require("../../../assets/serproemcam.png")}
+              // onPress={() => props.navigation.toggleDrawer()}
+            /> */}
           </View>
         </View>
       )}
@@ -74,13 +80,8 @@ export default function TurnosGuardias() {
 
 function Turno(props) {
   const { turnos, setTurnos, navigation } = props;
-  const {
-    nombreGuardia,
-    puestoTrabajo,
-    fechaTurno,
-    horarioTurno,
-    id,
-  } = turnos.item;
+  const { nombreGuardia, puestoTrabajo, fechaTurno, horarioTurno, id } =
+    turnos.item;
 
   return (
     <View style={styles.container}>

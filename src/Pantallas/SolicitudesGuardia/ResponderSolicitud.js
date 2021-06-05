@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, Text, View, Alert, TouchableOpacity } from "react-native";
+import { StyleSheet, Alert, View, TouchableOpacity } from "react-native";
 import {
   Input,
   Image,
   Button,
+  Text,
   Icon,
   Avatar,
   AirbnbRating,
@@ -159,7 +160,10 @@ export default function ResponderSolicitud(props) {
         errorMessage={errores.numeroPuestos}
         value={numeroPuestos}
       /> */}
-      <Text>Nombre del guardia con disponibilidad de tiempo</Text>
+      <View style={styles.viewText}>
+        <Text style={styles.text}>Guardia con disponibilidad de tiempo</Text>
+      </View>
+
       <Input
         placeholder="Nombre Guardia"
         onChangeText={(text) => setNombreGuardia(text)}
@@ -193,6 +197,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 20,
     height: 50,
+  },
+  viewText: {
+    margin: 5,
+    marginLeft: 5,
+    paddingLeft: 15,
+  },
+  text: {
+    fontWeight: "bold",
+    alignSelf: "center",
+    color: "#f07218",
   },
   btnaddnew: {
     backgroundColor: "#f07218",

@@ -57,10 +57,7 @@ export default function RegistrarInicioSalidaTurno() {
         fechacreacion: new Date(),
       };
 
-      const registrardocumento = await addRegistro(
-        "InicioSalidaTurnos",
-        documento
-      );
+      const registrardocumento = await addRegistro("Turnos", documento);
       if (registrardocumento.statusreponse) {
         Alert.alert(
           "Registro Exitoso",
@@ -112,19 +109,19 @@ export default function RegistrarInicioSalidaTurno() {
         errorMessage={errores.puestoTrabajo}
       />
       <Input
-        placeholder="Fecha del turno"
+        placeholder="Fecha día/mes/año"
         onChangeText={(text) => setFechaTurno(text)}
         inputStyle={styles.input}
         errorMessage={errores.fechaTurno}
       />
       <Input
-        placeholder="Hora de entrada"
+        placeholder="Hora de entrada am o pm"
         onChangeText={(text) => setHoraEntrada(text)}
         inputStyle={styles.input}
         errorMessage={errores.horarioTurno}
       />
       <Input
-        placeholder="Hora de salida"
+        placeholder="Hora de salida am o pm"
         onChangeText={(text) => setHoraSalida(text)}
         inputStyle={styles.input}
         errorMessage={errores.horarioTurno}

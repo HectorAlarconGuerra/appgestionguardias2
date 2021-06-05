@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
-import { Icon } from "react-native-elements";
+import { Avatar, Icon } from "react-native-elements";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import {
-  ListarInicioSalidaTurno,
-  eliminarProducto,
-} from "../../Utils/Acciones";
+import { ListarTurnos, eliminarProducto } from "../../Utils/Acciones";
 
 export default function InicioSalidaTurno() {
   const navigation = useNavigation();
@@ -14,14 +11,14 @@ export default function InicioSalidaTurno() {
 
   useEffect(() => {
     (async () => {
-      setTurnos(await ListarInicioSalidaTurno());
+      setTurnos(await ListarTurnos());
     })();
   }, []);
 
   useFocusEffect(
     useCallback(() => {
       (async () => {
-        setTurnos(await ListarInicioSalidaTurno());
+        setTurnos(await ListarTurnos());
       })();
     }, [])
   );
@@ -53,11 +50,17 @@ export default function InicioSalidaTurno() {
           >
             <Icon
               type="material-community"
-              name="cart-plus"
+              name="timer-sand"
               size={100}
               color="#f07218"
               style={{ margin: 10 }}
             />
+            {/* <Avatar
+              rounded
+              size="xlarge"
+              source={require("../../../assets/serproemcam.png")}
+              // onPress={() => props.navigation.toggleDrawer()}
+            /> */}
           </View>
         </View>
       )}
@@ -124,8 +127,8 @@ function Turno(props) {
                     style: "default",
                     text: "Confirmar",
                     onPress: async () => {
-                      await eliminarProducto("InicioSalidaTurnos", id);
-                      setTurnos(await ListarInicioSalidaTurno());
+                      await eliminarProducto("Turnos", id);
+                      setTurnos(await ListarTurnos());
                     },
                   },
                   {

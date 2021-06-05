@@ -110,19 +110,19 @@ export default function RegistrarReporte() {
         errorMessage={errores.puestoTrabajo}
       />
       <Input
-        placeholder="Fecha del reporte"
+        placeholder="Fecha día/mes/año "
         onChangeText={(text) => setFechaReporte(text)}
         inputStyle={styles.input}
         errorMessage={errores.fechaReporte}
       />
       <Input
-        placeholder="Hora del reporte"
+        placeholder="Hora del reporte am o pm"
         onChangeText={(text) => setHoraReporte(text)}
         inputStyle={styles.input}
         errorMessage={errores.horaReporte}
       />
       <Input
-        placeholder="Reporte de la guardia"
+        placeholder="Reporte 100% éxitos"
         onChangeText={(text) => setReporte(text)}
         inputStyle={styles.input}
         errorMessage={errores.reporte}

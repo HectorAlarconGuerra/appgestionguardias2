@@ -140,17 +140,23 @@ export default function EditarInicioSalidaTurnoGuardia(props) {
         errorMessage={errores.fechaTurno}
         value={fechaTurno}
       /> */}
-      <Text>Hora entrada</Text>
+      <View style={styles.viewText}>
+        <Text style={styles.text}>Hora entrada</Text>
+      </View>
+
       <Input
-        placeholder="Hora de entrada"
+        placeholder="Hora de entrada am o pm"
         onChangeText={(text) => setHoraEntrada(text)}
         inputStyle={styles.input}
         errorMessage={errores.horaEntrada}
         value={horaEntrada}
       />
-      <Text>Hora salida</Text>
+      <View style={styles.viewText}>
+        <Text style={styles.text}>Hora salida</Text>
+      </View>
+
       <Input
-        placeholder="Hora de salida"
+        placeholder="Hora de salida am o pm"
         onChangeText={(text) => setHoraSalida(text)}
         inputStyle={styles.input}
         errorMessage={errores.horaSalida}
@@ -183,6 +189,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 20,
     height: 50,
+  },
+  viewText: {
+    margin: 5,
+    marginLeft: 5,
+    paddingLeft: 15,
+  },
+  text: {
+    fontWeight: "bold",
+    // alignSelf: "center",
+    color: "#f07218",
   },
   btnaddnew: {
     backgroundColor: "#f07218",

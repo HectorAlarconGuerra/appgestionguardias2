@@ -50,7 +50,7 @@ export default function Guardias() {
           >
             <Icon
               type="material-community"
-              name="cart-plus"
+              name="account-check"
               size={100}
               color="#f07218"
               style={{ margin: 10 }}
