@@ -48,7 +48,7 @@ export default function EnviarConfirmacion() {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../../assets/logo.png")}
+        source={require("../../../assets/serproemcam.png")}
         style={styles.imglogo}
       />
       <View style={styles.panel}>
