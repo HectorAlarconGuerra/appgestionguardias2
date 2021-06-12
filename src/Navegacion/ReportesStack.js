@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import * as Notifications from "expo-notifications";
 import { createStackNavigator } from "@react-navigation/stack";
-
+//import { StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 import Reportes from "../Pantallas/Reportes/Reportes";
 import RegistrarReporte from "../Pantallas/Reportes/RegistrarReporte";
 import EditarReporte from "../Pantallas/Reportes/EditarReporte";
+import { StyleSheet } from "react-native";
+import { View } from "native-base";
 
 const Stack = createStackNavigator();
 
@@ -42,7 +44,8 @@ export default function ReportesStack() {
         data: { reporte: "100% éxitos" },
       },
       trigger: {
-        seconds: 3540,
+        seconds: 5,
+        // seconds: 3540,
         //  hour: 1,
         //  minute: 3,
       },
@@ -63,13 +66,15 @@ export default function ReportesStack() {
 
   const buttonRight = () => {
     return (
-      <Icon
-        type="material-community"
-        name="bell"
-        color="#f07218"
-        size={30}
-        onPress={() => triggerNotificationHandler()}
-      />
+      <View style={styles.viewmedio}>
+        <Icon
+          type="material-community"
+          name="bell"
+          color="#f07218"
+          size={30}
+          onPress={() => triggerNotificationHandler()}
+        />
+      </View>
     );
   };
 
@@ -97,3 +102,12 @@ export default function ReportesStack() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  viewmedio: {
+    // flex: 1,
+    marginRight: 47,
+    //  justifyContent: "center",
+    //   alignItems: "center",
+  },
+});

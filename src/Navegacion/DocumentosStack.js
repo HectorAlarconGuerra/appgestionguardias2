@@ -8,6 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 import Documentos from "../Pantallas/Documentos/Documentos";
 import RegistrarDocumento from "../Pantallas/Documentos/RegistrarDocumento";
 import EditarDocumento from "../Pantallas/Documentos/EditarDocumento";
+import { StyleSheet } from "react-native";
+import { View } from "native-base";
 
 const Stack = createStackNavigator();
 
@@ -44,7 +46,8 @@ export default function DocumentosStack() {
       trigger: {
         // hour: 1,
         // day: 7,
-        seconds: 3540,
+        // seconds: 3540,
+        seconds: 5,
       },
     });
   };
@@ -63,13 +66,15 @@ export default function DocumentosStack() {
 
   const buttonRight = () => {
     return (
-      <Icon
-        type="material-community"
-        name="bell"
-        color="#fff"
-        size={30}
-        onPress={() => triggerNotificationHandler()}
-      />
+      <View style={styles.viewmedio}>
+        <Icon
+          type="material-community"
+          name="bell"
+          color="#fff"
+          size={30}
+          onPress={() => triggerNotificationHandler()}
+        />
+      </View>
     );
   };
   return (
@@ -101,3 +106,12 @@ export default function DocumentosStack() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  viewmedio: {
+    // flex: 1,
+    marginRight: 47,
+    //  justifyContent: "center",
+    //   alignItems: "center",
+  },
+});
